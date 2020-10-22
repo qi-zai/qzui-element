@@ -9,23 +9,25 @@
         ></path>
       </svg>
     </li>
-    <li v-for="(v, i) in menu_list" :key="i" @click="to(v)"><i :class="'el-icon-' + v.icon" />{{ v.label }}</li>
+    <li v-for="(v, i) in menu_list" :key="i" @click="link = v.link"><i :class="'el-icon-' + v.icon" />{{ v.label }}</li>
   </ul>
 </template>
 
 <script>
 export default {
   data: () => ({
+    link: null,
+
     menu_list: Object.freeze([
       { label: '数据表格', icon: 'menu', link: '/data-table' },
-      { label: '数据表格', icon: 'menu' },
+      { label: '数据筛选器', icon: 'menu', link: '/layout-filter' },
       { label: '数据表格', icon: 'menu' }
     ])
   }),
 
-  methods: {
-    to(menu) {
-      this.$router.push(menu.link)
+  watch: {
+    link(v) {
+      this.$router.push(v)
     }
   }
 }

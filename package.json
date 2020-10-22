@@ -1,18 +1,24 @@
 {
   "name": "qzui",
-  "version": "0.0.1",
+  "version": "0.0.9",
   "description": "基于 ElementUI 二次封装",
   "main": "lib/qzui.common.js",
-  "files": ["lib"],
-  "author": "qi-zai<15248448516@163.com>",
+  "files": [
+    "lib"
+  ],
+  "author": {
+    "name": "qi-zai",
+    "email": "15248448516@163.com"
+  },
   "repository": {
     "type": "git",
-    "url": "https://github.com/qi-zai/qzui-element.git"
+    "url": "git+https://github.com/qi-zai/qzui-element.git"
   },
+  "homepage": "https://github.com/qi-zai/qzui-element#readme",
   "license": "MIT",
   "scripts": {
-    "dev": "vue-cli-service serve",
     "build": "vue-cli-service build",
+    "dev": "vue-cli-service serve",
     "lib": "rm -rf lib && vue-cli-service build --target lib --name qzui --dest lib packages/index.js",
     "lint": "vue-cli-service lint"
   },

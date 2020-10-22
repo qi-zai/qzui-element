@@ -1,43 +1,70 @@
 <template>
-  <div class="app-container" style="text-align: center;">
+  <div class="app-container">
     <h2>数据表格</h2>
-    <data-table :column="column" :data="list" :height="300" column-width="180" @click-action="tableAction" />
+
+    <el-button type="primary" @click="getTableRef">获取表格的 ref 实例</el-button>
+    <br /><br />
+
+    <data-table ref="table" :column="column" :data="list" :height="300" :page-info="pageInfo" column-width="180" />
   </div>
 </template>
 
 <script>
+/* eslint-disable no-console */
 import DataTable from '~/data-table/src/data-table'
 
 export default {
   components: { DataTable },
 
-  data: () => ({
-    column: [
-      { type: 'selection', width: '55' },
-      {
-        prop: 'date',
-        label: '日期',
-        filters: [{ text: '2016-05-2', value: '2016-05-2' }],
-        filterMethod: (value, row, column) => value === row.date,
-        sortable: true
-      },
-      { prop: 'name', label: '名称', fixed: true },
-      { prop: 'address', label: '地址' },
-      { prop: 'address', label: '地址' },
-      { prop: 'address', label: '地址' },
-      { prop: 'address', label: '地址' },
-      { prop: 'address', label: '地址' },
-      { prop: 'address', label: '地址' },
-      { prop: 'address', label: '地址' },
-      { prop: 'address', label: '地址' },
-      { prop: 'address', label: '地址' },
-      { prop: 'address', label: '地址' },
-      { prop: 'tag', label: '标签', tag: ({ row }) => (row.tag === '家' ? 'success' : 'primary') },
-      { label: '操作', actions: [{ icon: 'el-icon-edit', label: '编辑' }] }
-    ],
+  data() {
+    return {
+      // 分页信息
+      pageInfo: {
+        currentPage: 1,
+        pageSize: 10,
+        total: 37,
 
-    list: []
-  }),
+        // 分页事件
+        on: { 'size-change': this.sizeChange, 'current-change': this.currentChange }
+      },
+
+      column: [
+        { type: 'selection', width: '55' },
+        { type: 'index', width: '55', fixed: true },
+        {
+          prop: 'date',
+          label: '日期',
+          filters: [{ text: '2016-05-2', value: '2016-05-2' }],
+          filterMethod: (value, row, column) => value === row.date,
+          sortable: true
+        },
+        { prop: 'name', label: '名称' },
+        {
+          prop: 'address',
+          label: '地址',
+          labelCallback: ({ row }) => `${row.name}：的地址为【${row.address}】`,
+          width: '315px',
+          fixed: true
+        },
+        { prop: 'address', label: '地址' },
+        { prop: 'address', label: '地址' },
+        { prop: 'tag', label: '标签', tag: ({ row }) => (row.tag === '家' ? 'success' : 'primary') },
+        {
+          label: '操作',
+          width: '380px',
+          actions: [
+            { icon: 'el-icon-edit', label: '编辑', click: this.tableAction },
+            { icon: 'el-icon-edit', label: '编辑', click: this.tableAction },
+            { icon: 'el-icon-edit', label: '编辑', click: this.tableAction },
+            { icon: 'el-icon-edit', label: '编辑', click: this.tableAction },
+            { icon: 'el-icon-edit', label: '编辑', click: this.tableAction }
+          ]
+        }
+      ],
+
+      list: []
+    }
+  },
 
   mounted() {
     this.fetch()
@@ -58,9 +85,20 @@ export default {
       this.list = Object.freeze(list)
     },
 
-    tableAction({ row }, props) {
-      // eslint-disable-next-line no-console
-      console.log(row, props)
+    currentChange(current) {
+      console.log(current)
+    },
+
+    sizeChange(pageSize) {
+      console.log(pageSize)
+    },
+
+    tableAction({ row }) {
+      console.log(row)
+    },
+
+    getTableRef() {
+      console.log(this.$refs.table.getTableRef())
     }
   }
 }
