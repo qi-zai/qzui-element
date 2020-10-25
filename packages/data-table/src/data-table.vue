@@ -39,10 +39,13 @@ export default {
       else if (col.actions && col.actions.length) {
         return {
           default: (attrs) =>
-            col.actions.map((props) =>
+            (typeof col.actions === 'function' ? col.actions(attrs) : col.actions).map((props) =>
               h(
                 'el-button',
-                { props: { size: this.size, type: 'text', ...props }, on: { click: () => props.click(attrs) } },
+                {
+                  props: { size: this.size, type: 'text', ...props },
+                  on: { click: () => props.click(attrs, props) }
+                },
                 props.label
               )
             )

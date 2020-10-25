@@ -48,12 +48,16 @@ export default {
         },
         { prop: 'address', label: '地址' },
         { prop: 'address', label: '地址' },
-        { prop: 'tag', label: '标签', tag: ({ row }) => (row.tag === '家' ? 'success' : 'primary') },
+        {
+          prop: 'tag',
+          label: '标签',
+          tag: ({ row }) => (row.tag === '家' ? 'success' : 'primary')
+        },
         {
           label: '操作',
           width: '380px',
-          actions: [
-            { icon: 'el-icon-edit', label: '编辑', click: this.tableAction },
+          actions: ({ row }) => [
+            { icon: 'el-icon-edit', type: row.enable ? 'danger' : 'primary', label: '编辑', click: this.tableAction },
             { icon: 'el-icon-edit', label: '编辑', click: this.tableAction },
             { icon: 'el-icon-edit', label: '编辑', click: this.tableAction },
             { icon: 'el-icon-edit', label: '编辑', click: this.tableAction },
@@ -78,11 +82,12 @@ export default {
           id: i,
           date: '2016-05-' + i,
           name: '王小虎' + i,
+          enable: i % 3,
           address: '上海市普陀区金沙江路 ' + i + ' 弄',
           tag: '国家'[i % 2]
         })
       }
-      this.list = Object.freeze(list)
+      this.list = list
     },
 
     currentChange(current) {
@@ -94,7 +99,8 @@ export default {
     },
 
     tableAction({ row }) {
-      console.log(row)
+      row.enable = 0
+      row.tag = '家'
     },
 
     getTableRef() {

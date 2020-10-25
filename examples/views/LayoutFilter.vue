@@ -5,14 +5,16 @@
 </template>
 
 <script>
+import Custom from '@/components/Custom'
 import FilterLayout from '~/filter-layout'
+
 export default {
   components: { FilterLayout },
 
   data() {
     return {
       filters: [
-        { key: 'filter_input', mold: 'input', label: '输入:', value: '' },
+        { key: 'filter_input', mold: 'input', label: '输入', value: '' },
         {
           key: 'filter_select',
           mold: 'select',
@@ -22,7 +24,18 @@ export default {
           options: []
         },
         { key: 'filter_date', label: '日期', mold: 'date', type: 'monthrange', value: '' },
+
+        {
+          key: 'cascader',
+          mold: 'cascader',
+          value: ['100', '100100'],
+          clearable: true,
+          options: [{ value: '100', label: '100', children: [{ value: '100100', label: '100100' }] }]
+        },
+
+        { key: 'custom', mold: 'custom', value: [1, 2, 4], label: '自定义', custom: () => Custom },
         { mold: 'button', value: '取filters中的值', type: 'primary', icon: 'el-icon-edit', click: this.fetchData },
+        { mold: 'button', value: '查询中', type: 'primary', loading: true, plain: false, click: this.fetchData },
         [
           { mold: 'button', type: 'primary', value: '搜索', plain: false, round: true, click: this.clickHandle },
           { mold: 'button', type: 'warning', value: '重置', plain: false, round: true, click: this.clickHandle }

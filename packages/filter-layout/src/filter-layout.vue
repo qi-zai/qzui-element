@@ -73,7 +73,13 @@ export default {
               props.options &&
                 props.options.map((v, i) => h('el-dropdown-item', { nativeOn: { click: () => props.optionClick(i, v) } }, v))
             )
-          ])
+          ]),
+
+        cascader: (h, props) =>
+          h('el-cascader', { props: { size: this.size, ...props }, on: { input: (event) => (props.value = event) } }),
+
+        custom: (h, props) =>
+          h(props.custom(), { attrs: { size: this.size, ...props }, on: { input: (event) => (props.value = event) } })
       })
     }
   },
