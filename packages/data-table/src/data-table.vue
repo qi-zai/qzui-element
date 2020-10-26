@@ -23,7 +23,10 @@ export default {
         cols.push(
           h('el-table-column', {
             props: { filterMultiple: false, width: this.columnWidth, ...col },
-            scopedSlots: !['selection', 'index'].includes(col.type) && this.handleTableColumnScopedSlots(h, col)
+            scopedSlots:
+              !['selection', 'index'].includes(col.type) &&
+              !(col.prop && col.prop.includes('.')) &&
+              this.handleTableColumnScopedSlots(h, col)
           })
         )
       }

@@ -48,6 +48,7 @@ export default {
         },
         { prop: 'address', label: '地址' },
         { prop: 'address', label: '地址' },
+        { prop: 'label.name', label: 'label' },
         {
           prop: 'tag',
           label: '标签',
@@ -83,6 +84,7 @@ export default {
           date: '2016-05-' + i,
           name: '王小虎' + i,
           enable: i % 3,
+          label: { key: 0, name: '你好' },
           address: '上海市普陀区金沙江路 ' + i + ' 弄',
           tag: '国家'[i % 2]
         })
