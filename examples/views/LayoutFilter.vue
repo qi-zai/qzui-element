@@ -23,6 +23,14 @@ export default {
           props: { value: 'id', label: 'name' },
           options: []
         },
+        {
+          key: 'filter_select2222222',
+          mold: 'select',
+          label: '一个下拉框',
+          value: 'value2',
+          props: { value: 'id', label: 'name' },
+          options: { value1: '值1', value2: '值2' }
+        },
         { key: 'filter_date', label: '日期', mold: 'date', type: 'monthrange', value: '' },
 
         {

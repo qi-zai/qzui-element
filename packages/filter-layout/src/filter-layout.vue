@@ -19,24 +19,30 @@ export default {
         button: (h, props) =>
           h('el-button', { props: { size: this.size, plain: true, ...props }, on: { click: props.click } }, props.value),
 
-        select: (h, props) =>
-          h(
+        select: (h, props) => {
+          const childs = []
+          if (props.options) {
+            for (const k in props.options) {
+              childs.push(
+                h('el-option', {
+                  props: {
+                    value: props.options[k][props.props?.value || 'value'] || k,
+                    label: props.options[k][props.props?.label || 'label'] || props.options[k],
+                    disabled: props.options[k].disabled
+                  }
+                })
+              )
+            }
+          }
+          return h(
             'el-select',
             {
               attrs: { placeholder: '请选择...', size: this.size, ...props },
               on: { input: (event) => (props.value = event) }
             },
-            props.options &&
-              props.options.map((v) =>
-                h('el-option', {
-                  props: {
-                    value: v[props.props?.value || 'value'],
-                    label: v[props.props?.label || 'label'],
-                    disabled: v.disabled
-                  }
-                })
-              )
-          ),
+            childs
+          )
+        },
 
         date: (h, props) =>
           h('el-date-picker', {
