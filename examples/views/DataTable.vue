@@ -5,7 +5,15 @@
     <el-button type="primary" @click="getTableRef">获取表格的 ref 实例</el-button>
     <br /><br />
 
-    <data-table ref="table" :column="column" :data="list" :height="300" :page-info="pageInfo" column-width="180" />
+    <data-table
+      ref="table"
+      :column="column"
+      :data="list"
+      :height="300"
+      :page-info="pageInfo"
+      column-width="180"
+      @page-change="pageChange"
+    />
   </div>
 </template>
 
@@ -19,14 +27,7 @@ export default {
   data() {
     return {
       // 分页信息
-      pageInfo: {
-        currentPage: 1,
-        pageSize: 10,
-        total: 37,
-
-        // 分页事件
-        on: { 'size-change': this.sizeChange, 'current-change': this.currentChange }
-      },
+      pageInfo: { currentPage: 1, pageSize: 10, total: 37 },
 
       column: [
         { type: 'selection', width: '55' },
@@ -92,12 +93,8 @@ export default {
       this.list = list
     },
 
-    currentChange(current) {
-      console.log(current)
-    },
-
-    sizeChange(pageSize) {
-      console.log(pageSize)
+    pageChange({ currentPage, pageSize }) {
+      console.log(currentPage, pageSize)
     },
 
     tableAction({ row }) {

@@ -15,6 +15,10 @@ export default {
     pageInfo: { type: Object, default: null }
   },
 
+  destroyed() {
+    this.destroyedTimer()
+  },
+
   methods: {
     handleTableColumn(h) {
       const cols = []
@@ -62,6 +66,25 @@ export default {
 
     getTableRef() {
       return this.$refs.ref_table
+    },
+
+    currentChange(current) {
+      this.pageChange((this.pageInfo.currentPage = current))
+    },
+
+    sizeChange(pageSize) {
+      this.pageChange((this.pageInfo.pageSize = pageSize))
+    },
+
+    pageChange() {
+      if (this._timer) this.destroyedTimer()
+
+      this._timer = setTimeout(() => this.$emit('page-change', this.pageInfo), 100)
+    },
+
+    destroyedTimer() {
+      clearTimeout(this._timer)
+      this._timer = null
     }
   },
 
@@ -78,7 +101,7 @@ export default {
             pageSizes: [10, 30, 50, 100, 150, 200],
             ...this.pageInfo
           },
-          on: this.pageInfo.on
+          on: { 'size-change': this.sizeChange, 'current-change': this.currentChange }
         })
     ])
   }
