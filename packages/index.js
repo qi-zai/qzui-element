@@ -1,7 +1,8 @@
 import DataTable from './data-table'
 import FilterLayout from './filter-layout'
+import UploadMedia from './upload-media'
 
-const components = [DataTable, FilterLayout]
+const components = [DataTable, FilterLayout, UploadMedia]
 
 const install = function(Vue) {
   if (install.installed) return
@@ -18,7 +19,8 @@ if (typeof window !== 'undefined' && window.Vue) {
 export default {
   install,
   DataTable,
-  FilterLayout
+  FilterLayout,
+  UploadMedia
 }
 
-export { DataTable, FilterLayout }
+export { DataTable, FilterLayout, UploadMedia }
