@@ -20,8 +20,7 @@ export default {
 
     menu_list: Object.freeze([
       { label: '数据表格', icon: 'menu', link: '/data-table' },
-      { label: '数据筛选器', icon: 'menu', link: '/layout-filter' },
-      { label: '数据表格', icon: 'menu' }
+      { label: '数据筛选器', icon: 'menu', link: '/layout-filter' }
     ])
   }),
 

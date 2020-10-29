@@ -12,6 +12,8 @@ export default {
     border: { type: Boolean, default: true },
     columnWidth: { type: String, default: null },
 
+    events: { type: Object, default: () => ({}) },
+
     pageInfo: { type: Object, default: null }
   },
 
@@ -46,7 +48,7 @@ export default {
       else if (col.actions && col.actions.length) {
         return {
           default: (attrs) =>
-            (typeof col.actions === 'function' ? col.actions(attrs) : col.actions).map((props) =>
+            (typeof col.actions === 'function' ? col.actions.call(this.$parent, attrs) : col.actions).map((props) =>
               h(
                 'el-button',
                 {
@@ -90,7 +92,7 @@ export default {
 
   render(h) {
     return h('div', { class: 'qzui-data-table' }, [
-      h('el-table', { ref: 'ref_table', props: this.$props }, this.handleTableColumn(h)),
+      h('el-table', { ref: 'ref_table', props: { ...this.$props, ...this.$attrs }, on: this.events }, this.handleTableColumn(h)),
       this.pageInfo &&
         h('el-pagination', {
           props: {

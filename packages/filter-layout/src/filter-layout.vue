@@ -4,7 +4,12 @@ export default {
 
   props: {
     filters: { type: Array, default: () => [] },
-    size: { type: String, default: 'medium' }
+    size: { type: String, default: 'medium' },
+    labelWidth: { type: String, default: null },
+    columnSpan: { type: Number, default: null },
+    gutter: { type: Number, default: null },
+
+    grid: Boolean
   },
 
   data() {
@@ -17,7 +22,14 @@ export default {
           }),
 
         button: (h, props) =>
-          h('el-button', { props: { size: this.size, plain: true, ...props }, on: { click: props.click } }, props.value),
+          h(
+            'el-button',
+            {
+              props: { size: this.size, plain: true, ...props },
+              on: { click: (...args) => props.click && props.click(...args) }
+            },
+            props.value
+          ),
 
         select: (h, props) => {
           const childs = []
@@ -65,7 +77,7 @@ export default {
         buttonGroup: (h, props) =>
           h(
             'el-button-group',
-            props.map((item) => this.comps.button(h, item))
+            (props.buttons || props).map((item) => this.comps.button(h, item))
           ),
 
         dropdown: (h, props) =>
@@ -111,19 +123,38 @@ export default {
         data[item.key] = item.value
       }
       return data
+    },
+
+    reset() {
+      for (let i = 0, item; (item = this.filters[i]); i++) {
+        if (!item.mold || item.mold.includes('button')) continue
+        item.value = null
+      }
+    },
+
+    fetchLayout(h) {
+      const root = h(
+        'el-form',
+        { class: 'qzui-filter-layout', attrs: { inline: true, labelWidth: this.labelWidth } },
+        this.filters.map((props) => this.fetchItem(h, props))
+      )
+      if (!this.grid) return root
+
+      return h('el-row', { props: { gutter: this.gutter } }, [root])
+    },
+
+    fetchItem(h, props) {
+      const item = h('el-form-item', { props: { label: props.label, prop: props.key } }, [
+        this.comps[Array.isArray(props) ? 'buttonGroup' : props.mold](h, props)
+      ])
+      if (!this.grid) return item
+
+      return h('el-col', { props: { span: props.span || this.columnSpan } }, [item])
     }
   },
 
   render(h) {
-    return h(
-      'el-form',
-      { class: 'qzui-filter-layout', props: { inline: true } },
-      this.filters.map((props) =>
-        h('el-form-item', { props: { label: props.label } }, [
-          this.comps[Array.isArray(props) ? 'buttonGroup' : props.mold](h, props)
-        ])
-      )
-    )
+    return this.fetchLayout(h)
   }
 }
 </script>

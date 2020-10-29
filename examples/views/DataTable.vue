@@ -12,6 +12,7 @@
       :height="300"
       :page-info="pageInfo"
       column-width="180"
+      :events="{ 'cell-click': cellClick, 'row-click': rowClick }"
       @page-change="pageChange"
     />
   </div>
@@ -58,13 +59,7 @@ export default {
         {
           label: '操作',
           width: '380px',
-          actions: ({ row }) => [
-            { icon: 'el-icon-edit', type: row.enable ? 'danger' : 'primary', label: '编辑', click: this.tableAction },
-            { icon: 'el-icon-edit', label: '编辑', click: this.tableAction },
-            { icon: 'el-icon-edit', label: '编辑', click: this.tableAction },
-            { icon: 'el-icon-edit', label: '编辑', click: this.tableAction },
-            { icon: 'el-icon-edit', label: '编辑', click: this.tableAction }
-          ]
+          actions: this.actions
         }
       ],
 
@@ -93,6 +88,20 @@ export default {
       this.list = list
     },
 
+    actions(props) {
+      return [
+        { icon: 'el-icon-edit', type: props.row.enable ? 'danger' : 'primary', label: '编辑', click: this.tableAction },
+        { icon: 'el-icon-edit', label: 'test', click: this.test },
+        { icon: 'el-icon-edit', label: '编辑', click: this.tableAction },
+        { icon: 'el-icon-edit', label: '编辑', click: this.tableAction },
+        { icon: 'el-icon-edit', label: '编辑', click: this.tableAction }
+      ]
+    },
+
+    test(props) {
+      console.log('=======', props)
+    },
+
     pageChange({ currentPage, pageSize }) {
       console.log(currentPage, pageSize)
     },
@@ -104,6 +113,14 @@ export default {
 
     getTableRef() {
       console.log(this.$refs.table.getTableRef())
+    },
+
+    cellClick(row, column, cell, event) {
+      console.log(row, column, cell, event)
+    },
+
+    rowClick(row, column, event) {
+      console.log(row, column, event)
     }
   }
 }
