@@ -33,6 +33,10 @@ export default {
   data: () => ({ list: [] }),
 
   watch: {
+    value(v) {
+      this.list = v
+    },
+
     type() {
       this.reset()
     },
