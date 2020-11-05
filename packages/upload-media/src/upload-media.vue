@@ -34,8 +34,7 @@ export default {
   },
 
   data() {
-    const list = Array.isArray(this.value) ? this.value : this.value ? [this.value] : []
-    return { list }
+    return { list: [] }
   },
 
   computed: {
@@ -45,8 +44,9 @@ export default {
   },
 
   watch: {
-    value(v) {
-      this.list = v
+    value: {
+      immediate: true,
+      handler: 'setList'
     },
 
     type() {
@@ -71,6 +71,10 @@ export default {
   },
 
   methods: {
+    setList(value) {
+      this.list = Array.isArray(value) ? value : value ? [value] : []
+    },
+
     reset() {
       this.list.splice(0)
       this.$emit('input', null)

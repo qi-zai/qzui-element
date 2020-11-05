@@ -45,7 +45,7 @@ export default {
           options: [{ value: '100', label: '100', children: [{ value: '100100', label: '100100' }] }]
         },
 
-        { key: 'custom', mold: 'custom', value: [1, 2, 4], label: '自定义', custom: () => Custom },
+        { key: 'custom', mold: 'custom', value: [1, 2, 4], label: '自定义', component: Custom },
         { mold: 'button', label: ' ', value: '取filters中的值', type: 'primary', icon: 'el-icon-edit', click: this.fetchData },
         { mold: 'button', label: ' ', value: '查询中', type: 'primary', loading: true, plain: false, click: this.fetchData },
         {

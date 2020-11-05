@@ -11,6 +11,7 @@ export default {
     maxHeight: { type: Number, default: null },
     border: { type: Boolean, default: true },
     columnWidth: { type: String, default: null },
+    headerAlign: { type: String, default: 'center' },
 
     events: { type: Object, default: () => ({}) },
 
@@ -28,11 +29,20 @@ export default {
       for (let i = 0, col; (col = this.column[i]); i++) {
         cols.push(
           h('el-table-column', {
-            props: { filterMultiple: false, width: this.columnWidth, ...col },
-            scopedSlots:
-              !['selection', 'index'].includes(col.type) &&
-              !(col.prop && col.prop.includes('.')) &&
-              this.handleTableColumnScopedSlots(h, col)
+            class: 'twstst',
+            props: {
+              filterMultiple: false,
+              width: this.columnWidth,
+              headerAlign: this.headerAlign,
+              align: ['selection', 'index'].includes(col.type) ? 'center' : null,
+              className: col.type === 'editable' ? 'qzui-table-editable' : null,
+              ...col
+            },
+            scopedSlots: col.labelCallback
+              ? this.handleTableColumnScopedSlots(h, col)
+              : !['selection', 'index'].includes(col.type) &&
+                !(col.prop && col.prop.includes('.')) &&
+                this.handleTableColumnScopedSlots(h, col)
           })
         )
       }
@@ -41,11 +51,26 @@ export default {
     },
 
     handleTableColumnScopedSlots(h, col) {
-      if (col.tag)
+      if (col.type === 'editable') {
+        return {
+          default: (attrs) => {
+            return [
+              h('input', {
+                attrs: { placeholder: '请输入...', value: attrs.row[attrs.column.property], ...col.editorAttrs },
+                on: { input: (event) => (attrs.row[attrs.column.property] = event.target.value) }
+              })
+            ]
+          }
+        }
+      } else if (['expand', 'custom'].includes(col.type)) {
+        return {
+          default: (attrs) => [h(col.component, { props: { parentRow: attrs } })]
+        }
+      } else if (col.tag) {
         return {
           default: (attrs) => [h('el-tag', { props: { type: col.tag(attrs) } }, attrs.row.tag)]
         }
-      else if (col.actions && col.actions.length) {
+      } else if (col.actions) {
         return {
           default: (attrs) =>
             (typeof col.actions === 'function' ? col.actions.call(this.$parent, attrs) : col.actions).map((props) =>
@@ -53,7 +78,7 @@ export default {
                 'el-button',
                 {
                   props: { size: this.size, type: 'text', ...props },
-                  on: { click: () => props.click(attrs, props) }
+                  on: { click: () => props.click && props.click(attrs, props) }
                 },
                 props.label
               )
@@ -112,13 +137,25 @@ export default {
 
 <style lang="scss">
 .qzui-data-table {
-  .el-table--border th:first-child .cell,
-  .el-table--border td:first-child .cell {
-    text-align: center;
+  .el-pagination {
+    margin: 15px 0;
   }
 
-  .el-pagination {
-    margin-top: 8px;
+  .qzui-table-editable {
+    input {
+      margin: inherit;
+      padding: 0 8px;
+      width: 100%;
+      outline: 0;
+      font-size: inherit;
+      font-weight: inherit;
+      color: inherit;
+      line-height: 35px;
+      background-color: transparent;
+      border: 1px solid #ebeef5;
+      border-radius: 3px;
+      box-sizing: border-box;
+    }
   }
 }
 </style>

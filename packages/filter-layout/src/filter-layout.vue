@@ -97,7 +97,7 @@ export default {
           h('el-cascader', { props: { size: this.size, ...props }, on: { input: (event) => (props.value = event) } }),
 
         custom: (h, props) =>
-          h(props.custom(), { attrs: { size: this.size, ...props }, on: { input: (event) => (props.value = event) } })
+          h(props.component, { attrs: { size: this.size, ...props }, on: { input: (event) => (props.value = event) } })
       })
     }
   },

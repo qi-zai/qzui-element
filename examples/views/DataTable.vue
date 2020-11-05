@@ -9,10 +9,20 @@
       ref="table"
       :column="column"
       :data="list"
-      :height="300"
+      :height="230"
       :page-info="pageInfo"
       column-width="180"
       :events="{ 'cell-click': cellClick, 'row-click': rowClick }"
+      @page-change="pageChange"
+    />
+
+    <data-table
+      ref="table1"
+      :column="column1"
+      :data="list"
+      :height="230"
+      :page-info="pageInfo"
+      column-width="180"
       @page-change="pageChange"
     />
   </div>
@@ -20,6 +30,9 @@
 
 <script>
 /* eslint-disable no-console */
+import TableExpand from '@/components/TableExpand'
+import TableExpandCustom1 from '@/components/TableExpandCustom1'
+import TableExpandCustom2 from '@/components/TableExpandCustom2'
 import DataTable from '~/data-table/src/data-table'
 
 export default {
@@ -40,7 +53,7 @@ export default {
           filterMethod: (value, row, column) => value === row.date,
           sortable: true
         },
-        { prop: 'name', label: '名称' },
+        { type: 'editable', editorClass: 'editor-class', prop: 'name', label: '名称', editorAttrs: { maxlength: 8 } },
         {
           prop: 'address',
           label: '地址',
@@ -61,6 +74,19 @@ export default {
           width: '380px',
           actions: this.actions
         }
+      ],
+
+      column1: [
+        { type: 'expand', width: '55', component: TableExpand },
+        { prop: 'name', label: '名称' },
+        { type: 'custom', label: 'TableExpandCustom1', component: TableExpandCustom1 },
+        { type: 'custom', label: 'TableExpandCustom2', component: TableExpandCustom2 },
+        { prop: 'name', label: '名称' },
+        { prop: 'name', label: '名称' },
+        { prop: 'name', label: '名称' },
+        { prop: 'name', label: '名称' },
+        { prop: 'name', label: '名称' },
+        { prop: 'name', label: '名称' }
       ],
 
       list: []
