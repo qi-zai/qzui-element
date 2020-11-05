@@ -125,11 +125,11 @@ export default {
     },
 
     test(props) {
-      console.log('=======', props)
+      // console.log('=======', props)
     },
 
     pageChange({ currentPage, pageSize }) {
-      console.log(currentPage, pageSize)
+      // console.log(currentPage, pageSize)
     },
 
     tableAction({ row }) {
@@ -138,15 +138,15 @@ export default {
     },
 
     getTableRef() {
-      console.log(this.$refs.table.getTableRef())
+      // console.log(this.$refs.table.getTableRef())
     },
 
     cellClick(row, column, cell, event) {
-      console.log(row, column, cell, event)
+      // console.log(row, column, cell, event)
     },
 
     rowClick(row, column, event) {
-      console.log(row, column, event)
+      // console.log(row, column, event)
     }
   }
 }

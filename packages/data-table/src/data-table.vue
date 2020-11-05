@@ -29,13 +29,11 @@ export default {
       for (let i = 0, col; (col = this.column[i]); i++) {
         cols.push(
           h('el-table-column', {
-            class: 'twstst',
             props: {
               filterMultiple: false,
               width: this.columnWidth,
               headerAlign: this.headerAlign,
               align: ['selection', 'index'].includes(col.type) ? 'center' : null,
-              className: col.type === 'editable' ? 'qzui-table-editable' : null,
               ...col
             },
             scopedSlots: col.labelCallback
@@ -51,18 +49,7 @@ export default {
     },
 
     handleTableColumnScopedSlots(h, col) {
-      if (col.type === 'editable') {
-        return {
-          default: (attrs) => {
-            return [
-              h('input', {
-                attrs: { placeholder: '请输入...', value: attrs.row[attrs.column.property], ...col.editorAttrs },
-                on: { input: (event) => (attrs.row[attrs.column.property] = event.target.value) }
-              })
-            ]
-          }
-        }
-      } else if (['expand', 'custom'].includes(col.type)) {
+      if (['expand', 'custom'].includes(col.type)) {
         return {
           default: (attrs) => [h(col.component, { props: { parentRow: attrs } })]
         }
@@ -139,23 +126,6 @@ export default {
 .qzui-data-table {
   .el-pagination {
     margin: 15px 0;
-  }
-
-  .qzui-table-editable {
-    input {
-      margin: inherit;
-      padding: 0 8px;
-      width: 100%;
-      outline: 0;
-      font-size: inherit;
-      font-weight: inherit;
-      color: inherit;
-      line-height: 35px;
-      background-color: transparent;
-      border: 1px solid #ebeef5;
-      border-radius: 3px;
-      box-sizing: border-box;
-    }
   }
 }
 </style>
