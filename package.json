@@ -1,6 +1,6 @@
 {
   "name": "qzui",
-  "version": "0.2.1",
+  "version": "0.2.5",
   "description": "基于 ElementUI 二次封装",
   "main": "lib/qzui.common.js",
   "files": [
@@ -35,6 +35,7 @@
     "@vue/cli-service": "~4.5.0",
     "@vue/eslint-config-prettier": "^6.0.0",
     "babel-eslint": "^10.1.0",
+    "babel-plugin-component": "^1.1.1",
     "eslint": "^6.8.0",
     "eslint-plugin-nuxt": "^1.0.0",
     "eslint-plugin-prettier": "^3.1.4",

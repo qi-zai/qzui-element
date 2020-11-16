@@ -15,8 +15,6 @@ export default {
     return {}
   },
 
-  mounted() {
-    console.log(this.parentRow)
-  }
+  mounted() {}
 }
 </script>

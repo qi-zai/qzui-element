@@ -14,7 +14,11 @@
       column-width="180"
       :events="{ 'cell-click': cellClick, 'row-click': rowClick }"
       @page-change="pageChange"
-    />
+    >
+      <template v-slot:date="{ row }">
+        <div>{{ row }}</div>
+      </template>
+    </data-table>
 
     <data-table
       ref="table1"
@@ -51,15 +55,16 @@ export default {
           label: '日期',
           filters: [{ text: '2016-05-2', value: '2016-05-2' }],
           filterMethod: (value, row, column) => value === row.date,
-          sortable: true
+          sortable: true,
+          fixed: true
         },
         { type: 'editable', editorClass: 'editor-class', prop: 'name', label: '名称', editorAttrs: { maxlength: 8 } },
         {
           prop: 'address',
           label: '地址',
+          display: false,
           labelCallback: ({ row }) => `${row.name}：的地址为【${row.address}】`,
-          width: '315px',
-          fixed: true
+          width: '315px'
         },
         { prop: 'address', label: '地址' },
         { prop: 'address', label: '地址' },
@@ -117,7 +122,7 @@ export default {
     actions(props) {
       return [
         { icon: 'el-icon-edit', type: props.row.enable ? 'danger' : 'primary', label: '编辑', click: this.tableAction },
-        { icon: 'el-icon-edit', label: 'test', click: this.test },
+        { icon: 'el-icon-edit', label: 'test', click: this.test, style: { display: 'none' } },
         { icon: 'el-icon-edit', label: '编辑', click: this.tableAction },
         { icon: 'el-icon-edit', label: '编辑', click: this.tableAction },
         { icon: 'el-icon-edit', label: '编辑', click: this.tableAction }

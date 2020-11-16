@@ -27,6 +27,19 @@ export default {
       const cols = []
 
       for (let i = 0, col; (col = this.column[i]); i++) {
+        if (col.isShow === false) continue
+
+        let scopedSlots = null
+        if (col.prop && this.$scopedSlots[col.prop]) {
+          scopedSlots = { default: this.$scopedSlots[col.prop] }
+        } else {
+          scopedSlots = col.labelCallback
+            ? this.handleTableColumnScopedSlots(h, col)
+            : !['selection', 'index'].includes(col.type) &&
+              !(col.prop && col.prop.includes('.')) &&
+              this.handleTableColumnScopedSlots(h, col)
+        }
+
         cols.push(
           h('el-table-column', {
             props: {
@@ -36,11 +49,7 @@ export default {
               align: ['selection', 'index'].includes(col.type) ? 'center' : null,
               ...col
             },
-            scopedSlots: col.labelCallback
-              ? this.handleTableColumnScopedSlots(h, col)
-              : !['selection', 'index'].includes(col.type) &&
-                !(col.prop && col.prop.includes('.')) &&
-                this.handleTableColumnScopedSlots(h, col)
+            scopedSlots
           })
         )
       }
@@ -64,6 +73,7 @@ export default {
               h(
                 'el-button',
                 {
+                  style: props.style,
                   props: { size: this.size, type: 'text', ...props },
                   on: { click: () => props.click && props.click(attrs, props) }
                 },

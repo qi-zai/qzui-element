@@ -3,7 +3,7 @@
     <h1>普通布局</h1>
     <FilterLayout ref="filters1" :filters="filters" />
     <h1>带栅格布局</h1>
-    <FilterLayout ref="filters2" :filters="filters" grid label-width="55px" :column-span="5" />
+    <FilterLayout ref="filters2" :filters="filters" grid label-width="55px" :column-span="6" />
   </div>
 </template>
 
@@ -34,7 +34,7 @@ export default {
           props: { value: 'id', label: 'name' },
           options: { value1: '值1', value2: '值2' }
         },
-        { key: 'filter_date', label: '日期', mold: 'date', type: 'monthrange', value: '', span: 6 },
+        { key: 'filter_date', label: '日期', mold: 'date', type: 'daterange', value: '' },
 
         {
           key: 'cascader',

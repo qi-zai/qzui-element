@@ -4,7 +4,7 @@ export default {
 
   props: {
     filters: { type: Array, default: () => [] },
-    size: { type: String, default: 'medium' },
+    size: { type: String, default: 'small' },
     labelWidth: { type: String, default: null },
     columnSpan: { type: Number, default: null },
     gutter: { type: Number, default: null },
@@ -58,7 +58,7 @@ export default {
 
         date: (h, props) =>
           h('el-date-picker', {
-            style: { width: props.type === 'datetimerange' ? '358px' : '230px', ...props.style },
+            style: { width: props.type === 'datetimerange' ? '338px' : '218px', ...props.style },
             attrs: {
               type: 'date',
               placeholder: '选择日期',
@@ -135,7 +135,7 @@ export default {
     fetchLayout(h) {
       const root = h(
         'el-form',
-        { class: 'qzui-filter-layout', attrs: { inline: true, labelWidth: this.labelWidth } },
+        { class: 'qzui-filter-layout', attrs: { size: this.size, inline: true, labelWidth: this.labelWidth } },
         this.filters.map((props) => this.fetchItem(h, props))
       )
       if (!this.grid) return root
@@ -161,6 +161,10 @@ export default {
 
 <style lang="scss">
 .qzui-filter-layout {
+  .el-col {
+    min-height: 43px;
+  }
+
   .el-form-item {
     margin-bottom: 10px;
   }

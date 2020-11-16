@@ -1,3 +1,7 @@
+// ***************** script *****************
+import prototype from './utils/prototype'
+
+// ***************** 组件 *****************
 import DataTable from './data-table'
 import FilterLayout from './filter-layout'
 import UploadMedia from './upload-media'
@@ -23,4 +27,4 @@ export default {
   UploadMedia
 }
 
-export { DataTable, FilterLayout, UploadMedia }
+export { prototype, DataTable, FilterLayout, UploadMedia }
