@@ -7,7 +7,7 @@ export default {
     data: { type: Array, default: () => [] },
 
     height: { type: Number, default: null },
-    size: { type: String, default: 'mini' },
+    size: { type: String, default: null },
     maxHeight: { type: Number, default: null },
     border: { type: Boolean, default: true },
     columnWidth: { type: String, default: null },

@@ -4,12 +4,10 @@ export default {
 
   props: {
     filters: { type: Array, default: () => [] },
-    size: { type: String, default: 'small' },
+    size: { type: String, default: null },
     labelWidth: { type: String, default: null },
     columnSpan: { type: Number, default: null },
-    gutter: { type: Number, default: null },
-
-    grid: Boolean
+    gutter: { type: Number, default: null }
   },
 
   data() {
@@ -133,23 +131,17 @@ export default {
     },
 
     fetchLayout(h) {
-      const root = h(
+      return h(
         'el-form',
         { class: 'qzui-filter-layout', attrs: { size: this.size, inline: true, labelWidth: this.labelWidth } },
         this.filters.map((props) => this.fetchItem(h, props))
       )
-      if (!this.grid) return root
-
-      return h('el-row', { props: { gutter: this.gutter } }, [root])
     },
 
     fetchItem(h, props) {
-      const item = h('el-form-item', { props: { label: props.label, prop: props.key } }, [
+      return h('el-form-item', { props: { label: props.label, prop: props.key } }, [
         this.comps[Array.isArray(props) ? 'buttonGroup' : props.mold](h, props)
       ])
-      if (!this.grid) return item
-
-      return h('el-col', { props: { span: props.span || this.columnSpan } }, [item])
     }
   },
 
