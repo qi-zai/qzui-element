@@ -11,6 +11,7 @@ export default {
     maxHeight: { type: Number, default: null },
     border: { type: Boolean, default: true },
     columnWidth: { type: String, default: null },
+    align: { type: String, default: 'center' },
     headerAlign: { type: String, default: 'center' },
 
     events: { type: Object, default: () => ({}) },
@@ -46,7 +47,7 @@ export default {
               filterMultiple: false,
               width: this.columnWidth,
               headerAlign: this.headerAlign,
-              align: ['selection', 'index'].includes(col.type) ? 'center' : null,
+              align: ['selection', 'index'].includes(col.type) ? 'center' : this.align,
               ...col
             },
             scopedSlots
@@ -75,6 +76,7 @@ export default {
                 {
                   style: props.style,
                   props: { size: this.size, type: 'text', ...props },
+                  class: props.class,
                   on: { click: () => props.click && props.click(attrs, props) }
                 },
                 props.label
