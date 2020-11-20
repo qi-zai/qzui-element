@@ -1,18 +1,21 @@
 // ***************** script *****************
 import prototype from './utils/prototype'
+import { fetchMoldValues } from './utils/tools'
 
 // ***************** 组件 *****************
 import DataTable from './data-table'
 import FilterLayout from './filter-layout'
+import FormLayout from './form-layout'
 import UploadMedia from './upload-media'
 
-const components = [DataTable, FilterLayout, UploadMedia]
+const components = [DataTable, FilterLayout, UploadMedia, FormLayout]
 
-const install = function(Vue) {
+const install = function(Vue, { prototype = true }) {
   if (install.installed) return
   for (let i = 0, component; (component = components[i]); ) {
     Vue.use(component)
   }
+  if (prototype) prototype()
 }
 
 /* istanbul ignore if */
@@ -24,7 +27,8 @@ export default {
   install,
   DataTable,
   FilterLayout,
-  UploadMedia
+  UploadMedia,
+  FormLayout
 }
 
-export { prototype, DataTable, FilterLayout, UploadMedia }
+export { prototype, fetchMoldValues, DataTable, FilterLayout, UploadMedia }

@@ -114,19 +114,10 @@ export default {
       }[type]
     },
 
-    getValues() {
-      const data = {}
-      for (let i = 0, item; (item = this.filters[i]); i++) {
-        if (!item.key) continue
-        data[item.key] = item.value
-      }
-      return data
-    },
-
     reset() {
       for (let i = 0, item; (item = this.filters[i]); i++) {
         if (!item.mold || item.mold.includes('button')) continue
-        item.value = null
+        item.value = ''
       }
     },
 

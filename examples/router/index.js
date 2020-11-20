@@ -9,7 +9,8 @@ const router = new VueRouter({
     { path: '/', component: Home },
     { path: '/upload-media', component: () => import(/* webpackChunkName: "UploadMedia" */ '../views/UploadMedia.vue') },
     { path: '/layout-filter', component: () => import(/* webpackChunkName: "LayoutFilter" */ '../views/LayoutFilter.vue') },
-    { path: '/data-table', component: () => import(/* webpackChunkName: "DataTable" */ '../views/DataTable.vue') }
+    { path: '/data-table', component: () => import(/* webpackChunkName: "DataTable" */ '../views/DataTable.vue') },
+    { path: '/layout-form', component: () => import(/* webpackChunkName: "DataTable" */ '../views/LayoutForm.vue') }
   ]
 })
 
