@@ -1,7 +1,7 @@
 <script>
 import { fetchMoldValues } from '~/utils/tools'
 export default {
-  name: 'LayoutForm',
+  name: 'FormLayout',
 
   props: {
     fetchKey: { type: String, default: '_prop' },
