@@ -12,7 +12,7 @@ const components = [DataTable, FilterLayout, UploadMedia, FormLayout]
 
 const install = function(Vue, { prototype = true }) {
   if (install.installed) return
-  for (let i = 0, component; (component = components[i]); ) {
+  for (const component of components) {
     Vue.use(component)
   }
   if (prototype) prototype()
@@ -31,4 +31,4 @@ export default {
   FormLayout
 }
 
-export { prototype, fetchMoldValues, DataTable, FilterLayout, UploadMedia }
+export { prototype, fetchMoldValues, DataTable, FilterLayout, FormLayout, UploadMedia }

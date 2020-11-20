@@ -1,17 +1,17 @@
 <template>
   <div>
     <h1>普通布局</h1>
-    <LayoutForm ref="formRef" :molds="molds" :rules="rules" label-width="100px" />
+    <FormLayout ref="formRef" :molds="molds" :rules="rules" label-width="100px" />
 
     <div style="text-align: center;"><el-button type="primary" @click="check">检查</el-button></div>
   </div>
 </template>
 
 <script>
-import LayoutForm from '~/form-layout'
+import FormLayout from '~/form-layout'
 
 export default {
-  components: { LayoutForm },
+  components: { FormLayout },
 
   data() {
     return {
