@@ -6,7 +6,7 @@ export default {
   props: {
     fetchKey: { type: String, default: '_prop' },
     molds: { type: Array, default: () => [] },
-    rules: { type: Object, default: null }
+    rules: { type: Object, default: () => ({}) }
   },
 
   data() {
@@ -79,7 +79,7 @@ export default {
       for (const v of list) {
         if (v.key) {
           const _prop = v.key.replace('.', '_')
-          if (v.prop) v.prop = _prop
+          if (this.rules[_prop]) v.prop = _prop
           v._prop = _prop
           model[_prop] = v.value
         }

@@ -18,7 +18,7 @@ export default {
       molds: [
         { label: '专栏标题', key: 'title', mold: 'input' },
         { label: '作者', key: 'author', mold: 'input' },
-        { label: '创建方式', key: 'createMode.key', prop: true, dict: 'CREATE_MODE', mold: 'select', options: null },
+        { label: '创建方式', key: 'createMode.key', dict: 'CREATE_MODE', mold: 'select', options: null },
         { label: '来源', key: 'excerpt', mold: 'input' },
         { label: '显示状态', key: 'status.key', options: null, dict: 'DISPLAY_STATUS', mold: 'select' },
         { label: '作者', key: 'author', mold: 'input', class: 'qzui-textarea', type: 'textarea' }
@@ -36,7 +36,7 @@ export default {
 
   methods: {
     check() {
-      this.$refs.formRef.getValues((data) => {
+      this.$refs.formRef.validate((data) => {
         // eslint-disable-next-line no-console
         console.log('success', data)
       })
