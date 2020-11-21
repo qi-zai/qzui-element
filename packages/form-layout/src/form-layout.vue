@@ -85,6 +85,16 @@ export default {
         }
       }
       return model
+    },
+
+    fetchSlot(h, props) {
+      let childs = null
+      if (this.$scopedSlots[props.key]) {
+        childs = this.$scopedSlots[props.key]({ cell: props, model: this.model })
+      } else {
+        childs = [this.comps[props.mold](h, props)]
+      }
+      return h('el-form-item', { props, class: props.class }, childs)
     }
   },
 
@@ -96,7 +106,7 @@ export default {
         class: ['qzui-form-layout', this.$attrs.class],
         props: { ...this.$props, ...this.$attrs, model: this.model }
       },
-      this.molds.map((props) => h('el-form-item', { props, class: props.class }, [this.comps[props.mold](h, props)]))
+      this.molds.map((props) => this.fetchSlot(h, props))
     )
   }
 }

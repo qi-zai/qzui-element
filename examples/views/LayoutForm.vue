@@ -1,7 +1,12 @@
 <template>
   <div>
     <h1>普通布局</h1>
-    <FormLayout ref="formRef" :molds="molds" :rules="rules" label-width="100px" />
+    <FormLayout ref="formRef" :molds="molds" inline :rules="rules" label-width="100px">
+      <template v-slot:test="props">
+        <el-input v-model="props.model.test" />
+        <span>{{ props }}</span>
+      </template>
+    </FormLayout>
 
     <div style="text-align: center;"><el-button type="primary" @click="check">检查</el-button></div>
   </div>
@@ -21,7 +26,8 @@ export default {
         { label: '创建方式', key: 'createMode.key', dict: 'CREATE_MODE', mold: 'select', options: null },
         { label: '来源', key: 'excerpt', mold: 'input' },
         { label: '显示状态', key: 'status.key', options: null, dict: 'DISPLAY_STATUS', mold: 'select' },
-        { label: '作者', key: 'author', mold: 'input', class: 'qzui-textarea', type: 'textarea' }
+        { label: '作者', key: 'author', mold: 'input', class: 'qzui-textarea', type: 'textarea' },
+        { label: '其他', key: 'test' }
       ],
 
       rules: {
@@ -31,7 +37,7 @@ export default {
   },
 
   mounted() {
-    this.molds[3].options = { '1': '爬虫', '2': '录入' }
+    this.molds[2].options = { '1': '爬虫', '2': '录入' }
   },
 
   methods: {

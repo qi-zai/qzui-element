@@ -1,5 +1,5 @@
 // ***************** script *****************
-import prototype from './utils/prototype'
+import prototypeFn from './utils/prototype'
 import { fetchMoldValues } from './utils/tools'
 
 // ***************** 组件 *****************
@@ -10,12 +10,11 @@ import UploadMedia from './upload-media'
 
 const components = [DataTable, FilterLayout, UploadMedia, FormLayout]
 
-const install = function(Vue, { prototype = true }) {
+const install = function(Vue) {
   if (install.installed) return
   for (const component of components) {
     Vue.use(component)
   }
-  if (prototype) prototype()
 }
 
 /* istanbul ignore if */
@@ -31,4 +30,4 @@ export default {
   FormLayout
 }
 
-export { prototype, fetchMoldValues, DataTable, FilterLayout, FormLayout, UploadMedia }
+export { prototypeFn, fetchMoldValues, DataTable, FilterLayout, FormLayout, UploadMedia }

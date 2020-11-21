@@ -4,8 +4,8 @@ import 'element-ui/lib/theme-chalk/index.css'
 import App from './App.vue'
 import router from './router'
 
-import { prototype } from '~/index'
-prototype()
+import { prototypeFn } from '~/index'
+prototypeFn()
 
 Vue.config.productionTip = false
 
