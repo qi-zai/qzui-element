@@ -3,11 +3,12 @@
  * @param {Array} molds
  * @param {Object} param1
  */
-export const fetchMoldValues = (molds, { origin, key }) => {
+export const fetchMoldValues = (molds, config) => {
   const obj = {}
   for (const v of molds) {
-    const value = origin ? origin[v[key]] : v.value
     if (!v.key) continue
+    const { origin, key } = config || {}
+    const value = origin ? origin[v[key]] : v.value
 
     if (v.key.includes(',')) {
       v.key.split(',').forEach((k, i) => k && value && value[i] && (obj[k] = value[i]))
