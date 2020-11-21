@@ -5,18 +5,8 @@ export default function() {
    * @param {Object} object 源对象
    */
   String.prototype.fetchValue = function(object) {
-    return this.split('.').reduce((o, k) => (o === undefined ? undefined : o[k]), object)
+    return this.split('.').reduce((o, k) => (o === undefined ? undefined : o[k]), object || {})
   }
-
-  // String.prototype.resolveObject = function(value) {
-  //   const ns = this.split('.')
-  //   let o = { [ns[ns.length - 1]]: value }
-  //   if (ns.length > 1)
-  //     for (let i = ns.length - 1; i--; ) {
-  //       o = { [ns[i]]: o }
-  //     }
-  //   return o
-  // }
 
   String.prototype.resolveObject = function(value) {
     const [first, ...os] = this.split('.').reverse()

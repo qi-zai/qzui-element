@@ -56,7 +56,7 @@ export default {
 
         date: (h, props) =>
           h('el-date-picker', {
-            style: { width: props.type === 'datetimerange' ? '338px' : '218px', ...props.style },
+            style: props.style,
             attrs: {
               type: 'date',
               placeholder: '选择日期',

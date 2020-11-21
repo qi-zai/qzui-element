@@ -10,7 +10,7 @@ export const fetchMoldValues = (molds, { origin, key }) => {
     if (!v.key) continue
 
     if (v.key.includes(',')) {
-      v.key.split(',').forEach((k, i) => k && (value || typeof value === 'number') && value[i] && (obj[k] = value[i]))
+      v.key.split(',').forEach((k, i) => k && value && value[i] && (obj[k] = value[i]))
     } else if (v.key.includes('.')) {
       const temp = v.key.resolveObject(value)
       for (const k in temp) obj[k] = temp[k]

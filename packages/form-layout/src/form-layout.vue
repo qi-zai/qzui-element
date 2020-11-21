@@ -55,7 +55,7 @@ export default {
 
         date: (h, mold) =>
           h('el-date-picker', {
-            style: { width: mold.type === 'datetimerange' ? '338px' : '218px', ...mold.style },
+            style: mold.style,
             attrs: {
               type: 'date',
               placeholder: '选择日期',
