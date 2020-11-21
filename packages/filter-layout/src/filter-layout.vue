@@ -141,19 +141,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss">
-.qzui-filter-layout {
-  .el-col {
-    min-height: 43px;
-  }
-
-  .el-form-item {
-    margin-bottom: 10px;
-  }
-
-  .el-input {
-    width: 180px;
-  }
-}
-</style>

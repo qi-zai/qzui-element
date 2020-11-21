@@ -51,12 +51,40 @@ export default {
           h('el-cascader', {
             props: { placeholder: '请选择...', ...mold, value: model[mold[this.fetchKey]] },
             on: { input: (event) => (model[mold[this.fetchKey]] = event) }
+          }),
+
+        date: (h, mold) =>
+          h('el-date-picker', {
+            style: { width: mold.type === 'datetimerange' ? '338px' : '218px', ...mold.style },
+            attrs: {
+              type: 'date',
+              placeholder: '选择日期',
+              'range-separator': '',
+              'start-placeholder': '开始日期',
+              'end-placeholder': '结束日期',
+              valueFormat: this.dateValueFormat(mold.type),
+              ...mold
+            },
+            on: { input: (event) => (model[mold[this.fetchKey]] = event) }
           })
       })
     }
   },
 
   methods: {
+    dateValueFormat(type = 'date') {
+      return {
+        year: 'yyyy',
+        month: 'yyyy-MM',
+        monthrange: 'yyyy-MM',
+        date: 'yyyy-MM-dd',
+        dates: 'yyyy-MM-dd',
+        daterange: 'yyyy-MM-dd',
+        datetime: 'yyyy-MM-dd hh:mm:ss',
+        datetimerange: 'yyyy-MM-dd hh:mm:ss'
+      }[type]
+    },
+
     getFormRef() {
       return this.$refs.formRef
     },
@@ -111,19 +139,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss">
-.qzui-form-layout {
-  .el-form-item {
-    width: 30%;
-  }
-
-  .el-form-item__content {
-    width: 230px;
-
-    .el-select {
-      width: 100%;
-    }
-  }
-}
-</style>

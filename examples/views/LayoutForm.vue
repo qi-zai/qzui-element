@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>普通布局</h1>
+    <h1>Form表单布局</h1>
     <FormLayout ref="formRef" :molds="molds" inline :rules="rules" label-width="100px">
       <template v-slot:test="props">
         <el-input v-model="props.model.test" />
@@ -27,6 +27,7 @@ export default {
         { label: '来源', key: 'excerpt', mold: 'input' },
         { label: '显示状态', key: 'status.key', options: null, dict: 'DISPLAY_STATUS', mold: 'select' },
         { label: '作者', key: 'author', mold: 'input', class: 'qzui-textarea', type: 'textarea' },
+        { label: '日期', key: 'date', mold: 'date' },
         { label: '其他', key: 'test' }
       ],
 
@@ -50,14 +51,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss">
-.el-form--inline .qzui-textarea {
-  width: 95%;
-  display: block;
-
-  .el-form-item__content {
-    width: 90%;
-  }
-}
-</style>
