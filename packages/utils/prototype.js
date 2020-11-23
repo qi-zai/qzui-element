@@ -5,7 +5,7 @@ export default function() {
    * @param {Object} object 源对象
    */
   String.prototype.fetchValue = function(object) {
-    return this.split('.').reduce((o, k) => (o === undefined ? undefined : o[k]), object || {})
+    return this.split('.').reduce((o, k) => (o === undefined || o === null ? undefined : o[k]), object || {})
   }
 
   String.prototype.resolveObject = function(value) {
