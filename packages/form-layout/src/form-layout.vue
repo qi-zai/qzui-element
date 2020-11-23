@@ -1,5 +1,7 @@
 <script>
 import { fetchMoldValues } from '~/utils/tools'
+const replaceKey = '_'
+
 export default {
   name: 'FormLayout',
 
@@ -63,7 +65,8 @@ export default {
               'start-placeholder': '开始日期',
               'end-placeholder': '结束日期',
               valueFormat: this.dateValueFormat(mold.type),
-              ...mold
+              ...mold,
+              value: model[mold[this.fetchKey]]
             },
             on: { input: (event) => (model[mold[this.fetchKey]] = event) }
           })
@@ -89,9 +92,17 @@ export default {
       return this.$refs.formRef
     },
 
-    setValues(data) {
+    setValues(data = {}) {
       for (const v of this.form_list) {
-        if (v.key) this.model[v._prop] = v.key.fetchValue(data)
+        if (!v.key) continue
+
+        if (v.key.includes(',')) {
+          const value = v.key.split(',').map((k) => data[k])
+          value && value.length && (this.model[v.key.replace(/,/g, replaceKey)] = value)
+        } else {
+          const value = v.key.fetchValue(data)
+          value && (this.model[v._prop] = value)
+        }
       }
     },
 
@@ -106,7 +117,7 @@ export default {
       const model = {}
       for (const v of list) {
         if (v.key) {
-          const _prop = v.key.replace('.', '_')
+          const _prop = v.key.replace(/\.|,/g, replaceKey)
           if (this.rules[_prop]) v.prop = _prop
           v._prop = _prop
           model[_prop] = v.value

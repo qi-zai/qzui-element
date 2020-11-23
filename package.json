@@ -1,6 +1,6 @@
 {
   "name": "qzui",
-  "version": "0.3.11",
+  "version": "0.3.12",
   "description": "基于 ElementUI 二次封装",
   "main": "lib/qzui.common.js",
   "files": [

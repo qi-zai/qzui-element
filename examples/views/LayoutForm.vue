@@ -21,24 +21,52 @@ export default {
   data() {
     return {
       molds: [
-        { label: '专栏标题', key: 'title', mold: 'input' },
+        { label: '专栏标题', key: 'title', mold: 'input', value: 'aaaaa' },
         { label: '作者', key: 'author', mold: 'input' },
         { label: '创建方式', key: 'createMode.key', dict: 'CREATE_MODE', mold: 'select', options: null },
+        { label: 'cascader', key: 'cascader3', mold: 'cascader', options: null },
         { label: '来源', key: 'excerpt', mold: 'input' },
         { label: '显示状态', key: 'status.key', options: null, dict: 'DISPLAY_STATUS', mold: 'select' },
         { label: '作者', key: 'author', mold: 'input', class: 'qzui-textarea', type: 'textarea' },
-        { label: '日期', key: 'date', mold: 'date' },
+        { label: '日期', key: 'date,date2', mold: 'date', type: 'daterange' },
         { label: '其他', key: 'test' }
       ],
 
       rules: {
-        createMode_key: [{ required: true, message: '请选择' }]
+        createMode_key: [{ required: true, message: '请选择' }],
+        date: [{ required: true, message: '请选择' }]
       }
     }
   },
 
   mounted() {
     this.molds[2].options = { '1': '爬虫', '2': '录入' }
+    this.molds[3].options = [
+      {
+        value: 'zhinan',
+        label: '指南',
+        children: [
+          {
+            value: 'shejiyuanze',
+            label: '设计原则',
+            children: [
+              {
+                value: 'yizhi',
+                label: '一致'
+              }
+            ]
+          }
+        ]
+      }
+    ]
+
+    this.$refs.formRef.setValues({
+      date: '2020-10-10',
+      date2: '2020-10-10',
+      cascader1: 'zhinan',
+      cascader2: 'shejiyuanze',
+      cascader3: 'yizhi'
+    })
   },
 
   methods: {
