@@ -7,6 +7,7 @@ export default {
 
   props: {
     fetchKey: { type: String, default: '_prop' },
+    slotKey: { type: String, default: 'key' },
     molds: { type: Array, default: () => [] },
     rules: { type: Object, default: () => ({}) },
     readonly: Boolean
@@ -131,8 +132,8 @@ export default {
       let childs = null
       if (this.readonly) {
         childs = this.$scopedSlots['readonly-slot']({ cell: props, model: this.model, readonly: this.readonly })
-      } else if (this.$scopedSlots[props.key]) {
-        childs = this.$scopedSlots[props.key]({ cell: props, model: this.model })
+      } else if (this.$scopedSlots[props[this.slotKey]]) {
+        childs = this.$scopedSlots[props[this.slotKey]]({ cell: props, model: this.model })
       } else {
         childs = [this.comps[props.mold](h, props)]
       }
