@@ -8,6 +8,12 @@
       </template>
     </FormLayout>
 
+    <FormLayout ref="formRef" :molds="molds" inline readonly label-width="100px">
+      <template v-slot:readonly-slot="{ cell, model }">
+        <span>{{ (cell._prop.fetchValue(model) || '').toString() }}</span>
+      </template>
+    </FormLayout>
+
     <div style="text-align: center;"><el-button type="primary" @click="check">检查</el-button></div>
   </div>
 </template>
@@ -45,18 +51,7 @@ export default {
       {
         value: 'zhinan',
         label: '指南',
-        children: [
-          {
-            value: 'shejiyuanze',
-            label: '设计原则',
-            children: [
-              {
-                value: 'yizhi',
-                label: '一致'
-              }
-            ]
-          }
-        ]
+        children: [{ value: 'shejiyuanze', label: '设计原则', children: [{ value: 'yizhi', label: '一致' }] }]
       }
     ]
 
