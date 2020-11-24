@@ -3,14 +3,14 @@
     <h1>Form表单布局</h1>
     <FormLayout ref="formRef" :molds="molds" inline :rules="rules" label-width="100px">
       <template v-slot:test="props">
-        <el-input v-model="props.model.test" />
-        <span>{{ props }}</span>
+        <el-input v-model="props.model.test" placeholder="请输入..." />
+        <!-- <span>{{ props }}</span> -->
       </template>
     </FormLayout>
 
-    <FormLayout ref="formRef" :molds="molds" inline readonly label-width="100px">
-      <template v-slot:readonly-slot="{ cell, model }">
-        <span>{{ (cell._prop.fetchValue(model) || '').toString() }}</span>
+    <FormLayout ref="formRef2" :molds="molds2" inline label-width="100px">
+      <template v-slot="{ cell, model }">
+        <span>{{ cell._prop.fetchValue(model) }}</span>
       </template>
     </FormLayout>
 
@@ -28,20 +28,33 @@ export default {
     return {
       molds: [
         { label: '专栏标题', key: 'title', mold: 'input', value: 'aaaaa' },
-        { label: '作者', key: 'author', mold: 'input' },
+        { label: '作者', key: 'author', mold: 'input', value: 'qizaicc' },
         { label: '创建方式', key: 'createMode.key', dict: 'CREATE_MODE', mold: 'select', options: null },
         { label: 'cascader', key: 'cascader3', mold: 'cascader', options: null },
         { label: '来源', key: 'excerpt', mold: 'input' },
         { label: '显示状态', key: 'status.key', options: null, dict: 'DISPLAY_STATUS', mold: 'select' },
-        { label: '作者', key: 'author', mold: 'input', class: 'qzui-textarea', type: 'textarea' },
+        { label: '作者', key: 'authortextarea', mold: 'input', class: 'qzui-textarea', type: 'textarea' },
         { label: '日期', key: 'date,date2', mold: 'date', type: 'daterange' },
         { label: '其他', key: 'test' }
       ],
 
       rules: {
         createMode_key: [{ required: true, message: '请选择' }],
-        date: [{ required: true, message: '请选择' }]
-      }
+        date: [{ required: true, message: '请选择' }],
+        test: [{ required: true, message: '请输入' }]
+      },
+
+      molds2: [
+        { label: '专栏标题', key: 'title', mold: 'input', value: 'aaaaa' },
+        { label: '作者', key: 'author', mold: 'input', value: 'qizaicc' },
+        { label: '创建方式', key: 'createMode.key', dict: 'CREATE_MODE', mold: 'select', options: null },
+        { label: 'cascader', key: 'cascader3', mold: 'cascader', options: null },
+        { label: '来源', key: 'excerpt', mold: 'input' },
+        { label: '显示状态', key: 'status.key', options: null, dict: 'DISPLAY_STATUS', mold: 'select' },
+        { label: '作者', key: 'authortextarea', mold: 'input', class: 'qzui-textarea', type: 'textarea' },
+        { label: '日期', key: 'date,date2', mold: 'date', type: 'daterange' },
+        { label: '其他', key: 'test' }
+      ]
     }
   },
 
@@ -56,6 +69,7 @@ export default {
     ]
 
     this.$refs.formRef.setValues({
+      title: '你要被覆盖了，哈哈哈',
       date: '2020-10-10',
       date2: '2020-10-10',
       cascader1: 'zhinan',
