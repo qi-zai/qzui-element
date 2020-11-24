@@ -147,7 +147,7 @@ export default {
       {
         ref: 'formRef',
         class: ['qzui-form-layout', this.$attrs.class],
-        props: { ...this.$attrs, rules: this.readonly ? this.rules : undefined, model: this.model }
+        props: { ...this.$attrs, rules: this.readonly ? undefined : this.rules, model: this.model }
       },
       this.molds.map((props) => this.fetchSlot(h, props))
     )
