@@ -130,9 +130,11 @@ export default {
     },
 
     fetchItem(h, props) {
-      return h('el-form-item', { props: { label: props.label, prop: props.key } }, [
-        this.comps[Array.isArray(props) ? 'buttonGroup' : props.mold](h, props)
-      ])
+      return h(
+        'el-form-item',
+        { class: { not__empty__label: props.label && props.label.trim() }, props: { label: props.label, prop: props.key } },
+        [this.comps[Array.isArray(props) ? 'buttonGroup' : props.mold](h, props)]
+      )
     }
   },
 

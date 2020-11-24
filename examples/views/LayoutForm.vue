@@ -8,8 +8,8 @@
       </template>
     </FormLayout>
 
-    <FormLayout ref="formRef2" :molds="molds2" inline label-width="100px">
-      <template v-slot="{ cell, model }">
+    <FormLayout ref="formRef2" :molds="molds2" inline readonly label-width="100px">
+      <template v-slot:readonly-slot="{ cell, model }">
         <span>{{ cell._prop.fetchValue(model) }}</span>
       </template>
     </FormLayout>

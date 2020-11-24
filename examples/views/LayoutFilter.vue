@@ -3,7 +3,7 @@
     <h1>普通布局</h1>
     <FilterLayout ref="filters1" :filters="filters" />
     <h1>带栅格布局</h1>
-    <FilterLayout ref="filters2" :filters="filters" grid label-width="55px" :column-span="6" />
+    <FilterLayout ref="filters2" :filters="filters" grid label-width="80px" :column-span="6" />
   </div>
 </template>
 
@@ -99,3 +99,9 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+.qzui-filter-layout .not__empty__label .el-form-item__label::after {
+  content: ':';
+}
+</style>
