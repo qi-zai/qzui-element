@@ -14,7 +14,11 @@
       </template>
     </FormLayout>
 
-    <div style="text-align: center;"><el-button type="primary" @click="check">检查</el-button></div>
+    <div style="text-align: center;">
+      <el-button type="primary" @click="setEmpty">设空值</el-button>
+      <el-button type="primary" @click="setValues">设置值</el-button>
+      <el-button type="primary" @click="check">检查</el-button>
+    </div>
   </div>
 </template>
 
@@ -67,18 +71,24 @@ export default {
         children: [{ value: 'shejiyuanze', label: '设计原则', children: [{ value: 'yizhi', label: '一致' }] }]
       }
     ]
-
-    this.$refs.formRef.setValues({
-      title: '你要被覆盖了，哈哈哈',
-      date: '2020-10-10',
-      date2: '2020-10-10',
-      cascader1: 'zhinan',
-      cascader2: 'shejiyuanze',
-      cascader3: 'yizhi'
-    })
   },
 
   methods: {
+    setEmpty() {
+      this.$refs.formRef.setValues()
+    },
+
+    setValues() {
+      this.$refs.formRef.setValues({
+        title: '你要被覆盖了，哈哈哈',
+        date: '2020-10-10',
+        date2: '2020-10-10',
+        cascader1: 'zhinan',
+        cascader2: 'shejiyuanze',
+        cascader3: 'yizhi'
+      })
+    },
+
     check() {
       this.$refs.formRef.validate((data) => {
         // eslint-disable-next-line no-console

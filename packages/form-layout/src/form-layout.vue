@@ -99,11 +99,9 @@ export default {
         if (!v.key) continue
 
         if (v.key.includes(',')) {
-          const value = v.key.split(',').map((k) => data[k])
-          value && value.length && (this.model[v.key.replace(/,/g, replaceKey)] = value)
+          this.model[v.key.replace(/,/g, replaceKey)] = v.key.split(',').map((k) => data[k] || '')
         } else {
-          const value = v.key.fetchValue(data)
-          value && (this.model[v._prop] = value)
+          this.model[v._prop] = v.key.fetchValue(data)
         }
       }
     },
