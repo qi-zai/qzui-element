@@ -1,13 +1,14 @@
 /**
  * 获取 mold 数据
- * @param {Array} molds
- * @param {Object} param1
+ *
+ * @param {array} molds
+ * @param {object} { origin: 数据源, key: 取值的key }
  */
-export const fetchMoldValues = (molds, config) => {
+export const fetchMoldValues = (molds, options) => {
   const obj = {}
   for (const v of molds) {
     if (!v.key) continue
-    const { origin, key } = config || {}
+    const { origin, key } = options || {}
     const value = origin ? origin[v[key]] : v.value
 
     if (v.key.includes(',')) {

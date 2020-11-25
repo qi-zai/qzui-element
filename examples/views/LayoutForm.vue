@@ -17,6 +17,7 @@
     <div style="text-align: center;">
       <el-button type="primary" @click="setEmpty">设空值</el-button>
       <el-button type="primary" @click="setValues">设置值</el-button>
+      <el-button type="primary" @click="setDate">设日期值</el-button>
       <el-button type="primary" @click="check">检查</el-button>
     </div>
   </div>
@@ -87,6 +88,10 @@ export default {
         cascader2: 'shejiyuanze',
         cascader3: 'yizhi'
       })
+    },
+
+    setDate() {
+      this.$refs.formRef.setValue('date,date2', ['2020-11-11', '2020-11-12']).setValue('createMode.key', '============')
     },
 
     check() {

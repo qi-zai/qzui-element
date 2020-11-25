@@ -1,4 +1,6 @@
 <script>
+import { fetchMoldValues } from '~/utils/tools'
+
 export default {
   name: 'FilterLayout',
 
@@ -112,6 +114,15 @@ export default {
         datetime: 'yyyy-MM-dd hh:mm:ss',
         datetimerange: 'yyyy-MM-dd hh:mm:ss'
       }[type]
+    },
+
+    /**
+     * 获取 mold 数据
+     *
+     * @param {object} { origin: 数据源, key: 取值的key }
+     */
+    getValues(options) {
+      return fetchMoldValues(this.filters, options)
     },
 
     reset() {

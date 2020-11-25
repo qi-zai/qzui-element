@@ -94,6 +94,13 @@ export default {
       return this.$refs.formRef
     },
 
+    setValue(key, value) {
+      const item = this.form_list.find((v) => key === v.key)
+      if (item) this.model[item[this.fetchKey]] = value
+
+      return this
+    },
+
     setValues(data = {}) {
       for (const v of this.form_list) {
         if (!v.key) continue
