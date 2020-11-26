@@ -4,7 +4,7 @@
     <FormLayout ref="formRef" :molds="molds" inline :rules="rules" label-width="100px">
       <template v-slot:test="props">
         <el-input v-model="props.model.test" placeholder="请输入..." />
-        <!-- <span>{{ props }}</span> -->
+        <span>{{ props }}</span>
       </template>
     </FormLayout>
 
@@ -15,7 +15,8 @@
     </FormLayout>
 
     <div style="text-align: center;">
-      <el-button type="primary" @click="setEmpty">设空值</el-button>
+      <el-button type="primary" @click="setEmpty">重置</el-button>
+      <el-button type="primary" @click="clearValidate">清空验证</el-button>
       <el-button type="primary" @click="setValues">设置值</el-button>
       <el-button type="primary" @click="setDate">设日期值</el-button>
       <el-button type="primary" @click="check">检查</el-button>
@@ -75,6 +76,10 @@ export default {
   },
 
   methods: {
+    clearValidate() {
+      this.$refs.formRef.clearValidate()
+    },
+
     setEmpty() {
       this.$refs.formRef.setValues()
     },

@@ -98,6 +98,7 @@ export default {
       const item = this.form_list.find((v) => key === v.key)
       if (item) this.model[item[this.fetchKey]] = value
 
+      this.clearValidate()
       return this
     },
 
@@ -111,6 +112,12 @@ export default {
           this.model[v._prop] = v.key.fetchValue(data)
         }
       }
+
+      this.clearValidate()
+    },
+
+    clearValidate() {
+      this.$refs.formRef.clearValidate()
     },
 
     validate(cb) {
