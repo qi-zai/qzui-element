@@ -117,7 +117,7 @@ export default {
     },
 
     clearValidate() {
-      this.$refs.formRef.clearValidate()
+      this.$nextTick(this.$refs.formRef.clearValidate)
     },
 
     validate(cb) {
