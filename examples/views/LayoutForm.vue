@@ -40,13 +40,13 @@ export default {
         { label: '来源', key: 'excerpt', mold: 'input' },
         { label: '显示状态', key: 'status.key', options: null, dict: 'DISPLAY_STATUS', mold: 'select' },
         { label: '作者', key: 'authortextarea', mold: 'input', class: 'qzui-textarea', type: 'textarea' },
-        { label: '日期', key: 'date,date2', mold: 'date', type: 'daterange' },
+        { label: '日期', key: 'startTime,endTime', mold: 'date', type: 'daterange' },
         { label: '其他', key: 'test' }
       ],
 
       rules: {
         createMode_key: [{ required: true, message: '请选择' }],
-        date: [{ required: true, message: '请选择' }],
+        startTime_endTime: [{ required: true, message: '请选择' }],
         test: [{ required: true, message: '请输入' }]
       },
 
@@ -87,8 +87,6 @@ export default {
     setValues() {
       this.$refs.formRef.setValues({
         title: '你要被覆盖了，哈哈哈',
-        date: '2020-10-10',
-        date2: '2020-10-10',
         cascader1: 'zhinan',
         cascader2: 'shejiyuanze',
         cascader3: 'yizhi'
