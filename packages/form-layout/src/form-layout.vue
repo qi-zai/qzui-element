@@ -109,8 +109,7 @@ export default {
         if (!v.key) continue
 
         if (v.key.includes(',')) {
-          const val = v.key.split(',').map((k) => data[k])
-          val[0] !== null && val[0] !== undefined && (this.model[v.key.replace(/,/g, replaceKey)] = val)
+          this.model[v.key.replace(/,/g, replaceKey)] = v.key.split(',').map((k) => data[k] || '')
         } else {
           this.model[v._prop] = v.key.fetchValue(data)
         }

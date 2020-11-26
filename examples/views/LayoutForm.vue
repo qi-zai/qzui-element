@@ -46,7 +46,12 @@ export default {
 
       rules: {
         createMode_key: [{ required: true, message: '请选择' }],
-        startTime_endTime: [{ required: true, message: '请选择' }],
+        startTime_endTime: [
+          {
+            required: true,
+            validator: (rule, value, cb) => cb(value && value.find((v) => v) ? undefined : new Error('请选择'))
+          }
+        ],
         test: [{ required: true, message: '请输入' }]
       },
 
