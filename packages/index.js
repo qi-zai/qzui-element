@@ -1,3 +1,5 @@
+import './styles/index.scss'
+
 // ***************** script *****************
 import prototypeFn from './utils/prototype'
 import { fetchMoldValues } from './utils/tools'
@@ -18,8 +20,9 @@ const install = function(Vue) {
 }
 
 /* istanbul ignore if */
-if (typeof window !== 'undefined' && window.Vue) {
-  install(window.Vue)
+if (typeof window !== 'undefined') {
+  prototypeFn()
+  window.Vue && install(window.Vue)
 }
 
 export default {

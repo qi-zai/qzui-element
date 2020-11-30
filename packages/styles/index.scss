@@ -1,0 +1,54 @@
+.el-form--inline {
+  &.qzui-form-layout .el-form-item__content,
+  &.qzui-filter-layout .el-form-item__content {
+    > .el-date-editor,
+    > .el-cascader,
+    > .el-textarea,
+    > .el-input,
+    > .el-select {
+      width: 230px;
+    }
+  }
+}
+
+.qzui-filter-layout {
+  .el-col {
+    min-height: 43px;
+  }
+
+  .el-form-item {
+    margin-bottom: 10px;
+  }
+}
+
+.el-form.qzui-form-layout,
+.qzui-filter-layout .not__empty__label {
+  label.el-form-item__label::after {
+    content: ':';
+  }
+}
+
+.el-form--inline.qzui-form-layout {
+  .box-block {
+    display: block;
+  }
+}
+
+.details_item {
+  width: 30%;
+
+  &_value {
+    color: #555;
+
+    &:empty::after {
+      content: '—';
+      color: #ddd;
+    }
+  }
+}
+
+.form-required::before {
+  content: "*";
+  color: #f56c6c;
+  margin-right: 4px;
+}

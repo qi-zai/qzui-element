@@ -14,7 +14,7 @@ export default {
     align: { type: String, default: 'center' },
     headerAlign: { type: String, default: 'center' },
 
-    events: { type: Object, default: () => ({}) },
+    on: { type: Object, default: () => ({}) },
 
     pageInfo: { type: Object, default: null }
   },
@@ -116,7 +116,7 @@ export default {
 
   render(h) {
     return h('div', { class: 'qzui-data-table' }, [
-      h('el-table', { ref: 'ref_table', props: { ...this.$props, ...this.$attrs }, on: this.events }, this.handleTableColumn(h)),
+      h('el-table', { ref: 'ref_table', props: { ...this.$props, ...this.$attrs }, on: this.on }, this.handleTableColumn(h)),
       this.pageInfo &&
         h('el-pagination', {
           props: {

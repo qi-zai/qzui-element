@@ -3,7 +3,9 @@
     <AppMenu />
     <div class="app-layout-right">
       <AppHead />
-      <div class="app-main"><router-view /></div>
+      <div class="app-main">
+        <transition name="fade" mode="out-in"><router-view /></transition>
+      </div>
     </div>
   </div>
 </template>
@@ -43,5 +45,23 @@ body,
       overflow: auto;
     }
   }
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition-property: opacity, transform;
+  transition-duration: 0.2s, 0.3s;
+}
+
+.fade-enter-to,
+.fade-leave {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+  transform: translateX(30px);
 }
 </style>

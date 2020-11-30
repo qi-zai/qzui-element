@@ -16,7 +16,7 @@
       @page-change="pageChange"
     >
       <template v-slot:date="{ row }">
-        <div>{{ row }}</div>
+        <div>{{ row.date }}</div>
       </template>
     </data-table>
 

@@ -18,7 +18,7 @@ export default {
         input: (h, props) =>
           h('el-input', {
             attrs: { placeholder: '请输入...', size: this.size, ...props },
-            on: { input: (event) => (props.value = event), ...props.events }
+            on: { ...props.on, input: (event) => (props.value = event) }
           }),
 
         button: (h, props) =>

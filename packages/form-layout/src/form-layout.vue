@@ -23,7 +23,7 @@ export default {
         input: (h, mold) =>
           h('el-input', {
             attrs: { placeholder: '请输入...', ...mold, value: model[mold[this.fetchKey]] },
-            on: { input: (event) => (model[mold[this.fetchKey]] = event), ...mold.events }
+            on: { ...mold.on, input: (event) => (model[mold[this.fetchKey]] = event) }
           }),
 
         select: (h, mold) => {
@@ -45,7 +45,7 @@ export default {
             'el-select',
             {
               attrs: { placeholder: '请选择...', ...mold, value: model[mold[this.fetchKey]] },
-              on: { input: (event) => (model[mold[this.fetchKey]] = event) }
+              on: { ...mold.on, input: (event) => (model[mold[this.fetchKey]] = event) }
             },
             childs
           )
@@ -54,7 +54,7 @@ export default {
         cascader: (h, mold) =>
           h('el-cascader', {
             props: { placeholder: '请选择...', ...mold, value: model[mold[this.fetchKey]] },
-            on: { input: (event) => (model[mold[this.fetchKey]] = event) }
+            on: { ...mold.on, input: (event) => (model[mold[this.fetchKey]] = event) }
           }),
 
         date: (h, mold) =>
@@ -70,7 +70,10 @@ export default {
               ...mold,
               value: model[mold[this.fetchKey]]
             },
-            on: { input: (event) => (model[mold[this.fetchKey]] = event) }
+            on: {
+              ...mold.on,
+              input: (event) => (model[mold[this.fetchKey]] = event)
+            }
           })
       })
     }

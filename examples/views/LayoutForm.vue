@@ -40,7 +40,7 @@ export default {
         { label: '来源', key: 'excerpt', mold: 'input' },
         { label: '显示状态', key: 'status.key', options: null, dict: 'DISPLAY_STATUS', mold: 'select' },
         { label: '作者', key: 'authortextarea', mold: 'input', class: 'qzui-textarea', type: 'textarea' },
-        { label: '日期', key: 'startTime,endTime', mold: 'date', type: 'daterange' },
+        { label: '日期', key: 'date,date2', mold: 'date', type: 'daterange' },
         { label: '其他', key: 'test' }
       ],
 
@@ -94,12 +94,16 @@ export default {
         title: '你要被覆盖了，哈哈哈',
         cascader1: 'zhinan',
         cascader2: 'shejiyuanze',
-        cascader3: 'yizhi'
+        cascader3: 'yizhi',
+        date: '2020-11-11',
+        date2: '2020-11-12'
       })
     },
 
     setDate() {
-      this.$refs.formRef.setValue('date,date2', ['2020-11-11', '2020-11-12']).setValue('createMode.key', '============')
+      this.$refs.formRef
+        .setValue('date,date2', ['2020-11-11 18:24:33', '2020-11-12 18:24:33'])
+        .setValue('createMode.key', '============')
     },
 
     check() {
