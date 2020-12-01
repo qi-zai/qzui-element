@@ -10,7 +10,7 @@ export default {
     slotKey: { type: String, default: 'key' },
     molds: { type: Array, default: () => [] },
     rules: { type: Object, default: () => ({}) },
-    readonly: Boolean
+    custom: Boolean
   },
 
   data() {
@@ -147,12 +147,16 @@ export default {
 
     fetchSlot(h, props) {
       let childs = null
-      if (this.readonly) {
-        childs = this.$scopedSlots['readonly-slot']({ cell: props, model: this.model, readonly: this.readonly })
-      } else if (this.$scopedSlots[props.slot_key || props[this.slotKey]]) {
-        childs = this.$scopedSlots[props.slot_key || props[this.slotKey]]({ cell: props, model: this.model })
+      if (this.custom) {
+        childs = this.$scopedSlots.default({ cell: props, model: this.model })
       } else {
-        childs = [this.comps[props.mold](h, props)]
+        const key = props.slot_key || props[this.slotKey]
+        if (key && this.$scopedSlots[key]) {
+          childs = this.$scopedSlots[key]({ cell: props, model: this.model })
+        } else {
+          if (!props.mold) throw new Error(`The mold attribute was not found on ${JSON.stringify(props)}`)
+          childs = [this.comps[props.mold](h, props)]
+        }
       }
       return h('el-form-item', { props, class: props.class }, childs)
     }

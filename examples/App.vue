@@ -1,25 +1,26 @@
 <template>
   <div class="app-layout">
     <AppMenu />
-    <div class="app-layout-right">
-      <AppHead />
-      <div class="app-main">
-        <transition name="fade" mode="out-in"><router-view /></transition>
-      </div>
+    <!-- <AppHead /> -->
+
+    <div class="app-main">
+      <transition name="fade" mode="out-in"><router-view /></transition>
     </div>
   </div>
 </template>
 
 <script>
 import AppMenu from '@/layout/menu'
-import AppHead from '@/layout/header'
+// import AppHead from '@/layout/header'
 
 export default {
-  components: { AppMenu, AppHead }
+  components: { AppMenu }
 }
 </script>
 
 <style lang="scss">
+$--menu-width: 230px;
+
 html,
 body,
 .app-layout {
@@ -27,23 +28,19 @@ body,
   height: 100%;
   margin: 0;
   padding: 0;
-  background-color: #f4f7fa;
+  background-color: hsl(210, 37%, 97%);
+  overflow: hidden;
 }
 
 .app-layout {
-  display: flex;
+  overflow-y: auto;
 
-  &-right {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
+  .app-menu {
+    width: $--menu-width;
+  }
 
-    .app-main {
-      flex: 1;
-      margin: 15px;
-      overflow: auto;
-    }
+  .app-main {
+    margin-left: $--menu-width;
   }
 }
 

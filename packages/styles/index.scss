@@ -1,23 +1,35 @@
+.el-box-card {
+  margin: 15px;
+  box-shadow: none;
+  border: 0;
+
+  .el-card__header {
+    border-color: #f8f8f8;
+  }
+}
+
 .el-form--inline {
-  &.qzui-form-layout .el-form-item__content,
-  &.qzui-filter-layout .el-form-item__content {
-    > .el-date-editor,
-    > .el-cascader,
-    > .el-textarea,
-    > .el-input,
-    > .el-select {
-      width: 230px;
+  &.qzui-form-layout,
+  &.qzui-filter-layout {
+    .el-form-item:not(.box-block) .el-form-item__content {
+      > .el-date-editor,
+      > .el-cascader,
+      > .el-textarea,
+      > .el-input,
+      > .el-select {
+        width: 230px;
+      }
     }
   }
 }
 
 .qzui-filter-layout {
-  .el-col {
-    min-height: 43px;
-  }
-
   .el-form-item {
     margin-bottom: 10px;
+  }
+
+  .el-col {
+    min-height: 43px;
   }
 }
 

@@ -1,23 +1,22 @@
 <template>
-  <div>
-    <h1>普通布局</h1>
-    <FilterLayout ref="filters1" :filters="filters" />
-    <h1>带栅格布局</h1>
-    <FilterLayout ref="filters2" :filters="filters" grid label-width="80px" :column-span="6" />
-  </div>
+  <el-card shadow="never" class="el-box-card">
+    <div slot="header">示例</div>
+
+    <FilterLayout ref="filters" :filters="filters" label-width="80px" />
+
+    <PreCode path="layout_filter/code" />
+  </el-card>
 </template>
 
 <script>
-import Custom from '@/components/Custom'
-import FilterLayout from '~/filter-layout'
+import CustomComponent from '@/components/Custom'
 
 export default {
-  components: { FilterLayout },
-
   data() {
     return {
       filters: [
         { key: 'filter_input', mold: 'input', label: '输入', value: '' },
+        { key: 'filter_date', label: '日期', mold: 'date', type: 'daterange', value: '' },
         {
           key: 'filter_select',
           mold: 'select',
@@ -27,15 +26,13 @@ export default {
           options: []
         },
         {
-          key: 'filter_select2222222',
+          key: 'filter_select2',
           mold: 'select',
           label: '下拉框',
           value: 'value2',
           props: { value: 'id', label: 'name' },
           options: { value1: '值1', value2: '值2' }
         },
-        { key: 'filter_date', label: '日期', mold: 'date', type: 'daterange', value: '' },
-
         {
           key: 'cascader',
           mold: 'cascader',
@@ -44,29 +41,26 @@ export default {
           clearable: true,
           options: [{ value: '100', label: '100', children: [{ value: '100100', label: '100100' }] }]
         },
-
-        { key: 'custom', mold: 'custom', value: [1, 2, 4], label: '自定义', component: Custom },
+        { key: 'custom', mold: 'custom', value: [1, 2, 4], label: '自定义', component: CustomComponent },
         { mold: 'button', label: ' ', value: '取filters中的值', type: 'primary', icon: 'el-icon-edit', click: this.fetchData },
-        { mold: 'button', label: ' ', value: '查询中', type: 'primary', loading: true, plain: false, click: this.fetchData },
+        { mold: 'button', value: '查询中', type: 'primary', loading: true, plain: false, click: this.fetchData },
+        {
+          mold: 'dropdown',
+          button: { value: '更多操作', type: 'primary', plain: true },
+          options: ['删除', '添加'],
+          optionClick: this.optionClick
+        },
         {
           mold: 'buttonGroup',
-          label: ' ',
           buttons: [
             { mold: 'button', type: 'primary', value: '搜索', plain: false, round: true },
-            { mold: 'button', type: 'warning', value: '重置', plain: false, round: true, click: this.reset }
+            { mold: 'button', type: 'primary', value: '重置', plain: false, round: true, click: this.reset }
           ]
         },
         [
           { mold: 'button', type: 'primary', value: '搜索', plain: false, round: true },
-          { mold: 'button', type: 'warning', value: '重置', plain: false, round: true, click: this.reset }
-        ],
-        {
-          mold: 'dropdown',
-          label: ' ',
-          button: { value: '更多操作', type: 'primary', plain: true },
-          options: ['删除', '添加'],
-          optionClick: this.optionClick
-        }
+          { mold: 'button', type: 'primary', value: '重置', plain: false, round: true, click: this.reset }
+        ]
       ]
     }
   },
@@ -85,7 +79,7 @@ export default {
     },
 
     fetchData() {
-      const data = this.$refs.filters1.getValues()
+      const data = this.$refs.filters.getValues()
       alert(JSON.stringify(data, '', 2))
     },
 
@@ -94,14 +88,8 @@ export default {
     },
 
     reset() {
-      this.$refs.filters1.reset()
+      this.$refs.filters.reset()
     }
   }
 }
 </script>
-
-<style lang="scss">
-.qzui-filter-layout .not__empty__label .el-form-item__label::after {
-  content: ':';
-}
-</style>

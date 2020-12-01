@@ -1,8 +1,10 @@
-.auto {
-  background-color: #fff;
-  width: 18px;
+.el-box-card {
+  .el-card__header span {
+    color: #ffa726;
+    margin-left: 1em;
+  }
 
-  a {
-    background-color: #fff;
+  .el-card__body {
+    padding: 15px;
   }
 }
