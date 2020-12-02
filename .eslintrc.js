@@ -19,6 +19,9 @@ module.exports = {
     'prettier'
   ],
   globals: {
+    "Vue": "readonly",
+    "VueRouter": "readonly",
+    "hljs": "readonly",
   },
   rules: {
     'nuxt/no-cjs-in-config': 0,

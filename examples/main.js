@@ -1,23 +1,23 @@
-import Vue from 'vue'
-import ElementUI from 'element-ui'
+import BoxCard from '@/components/BoxCard'
 import PreCode from '@/components/PreCode'
-import qzui from '../lib/qzui.common.js'
-import hljs from './hljs'
+import Docs from '@/components/Docs'
 
 import App from './App.vue'
 import router from './router'
+import qzui from '~/index'
 
-import 'element-ui/lib/theme-chalk/index.css'
-import '../lib/qzui.css'
+import '~/styles/index.scss'
 import '@/assets/scss/index.scss'
 
-Vue.use(qzui)
+Vue.component('BoxCard', BoxCard)
 Vue.component('PreCode', PreCode)
+Vue.component('Docs', Docs)
+
+Vue.use(qzui)
 Vue.use(hljs.vuePlugin)
 
+Vue.prototype.$ELEMENT = { size: 'small', zIndex: 300 }
 Vue.config.productionTip = false
-
-Vue.use(ElementUI, { size: 'small' })
 
 new Vue({
   router,

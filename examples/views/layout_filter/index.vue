@@ -1,11 +1,9 @@
 <template>
-  <el-card shadow="never" class="el-box-card">
-    <div slot="header">示例</div>
-
+  <BoxCard title="示例">
     <FilterLayout ref="filters" :filters="filters" label-width="80px" />
 
     <PreCode path="layout_filter/code" />
-  </el-card>
+  </BoxCard>
 </template>
 
 <script>

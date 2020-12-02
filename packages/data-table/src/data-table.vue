@@ -19,6 +19,16 @@ export default {
     pageInfo: { type: Object, default: null }
   },
 
+  computed: {
+    elTableRef() {
+      return this.$refs.elTableRef
+    },
+
+    selection() {
+      return this.elTableRef.selection
+    }
+  },
+
   destroyed() {
     this.destroyedTimer()
   },
@@ -90,10 +100,6 @@ export default {
       }
     },
 
-    getTableRef() {
-      return this.$refs.ref_table
-    },
-
     currentChange(current) {
       this.pageChange((this.pageInfo.currentPage = current))
     },
@@ -116,7 +122,7 @@ export default {
 
   render(h) {
     return h('div', { class: 'qzui-data-table' }, [
-      h('el-table', { ref: 'ref_table', props: { ...this.$props, ...this.$attrs }, on: this.on }, this.handleTableColumn(h)),
+      h('el-table', { ref: 'elTableRef', props: { ...this.$props, ...this.$attrs }, on: this.on }, this.handleTableColumn(h)),
       this.pageInfo &&
         h('el-pagination', {
           props: {

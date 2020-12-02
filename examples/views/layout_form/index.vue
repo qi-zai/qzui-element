@@ -1,7 +1,6 @@
 <template>
   <div>
-    <el-card shadow="never" class="el-box-card">
-      <div slot="header">示例1 - 基础<span>注意：在不使用插槽的情况下 mold 字段必须要定义</span></div>
+    <BoxCard title="示例1 - 基础" tip="注意：在不使用插槽的情况下 mold 字段必须要定义">
       <FormLayout ref="formRef_01" :molds="molds_01" inline :rules="rules_01" label-width="100px" />
 
       <div class="button-group">
@@ -13,10 +12,9 @@
       </div>
 
       <PreCode path="layout_form/m_01/code" />
-    </el-card>
+    </BoxCard>
 
-    <el-card shadow="never" class="el-box-card">
-      <div slot="header">示例2 - 插槽1<span>根据 molds 中的 key 或者 slot_key 定义插槽</span></div>
+    <BoxCard title="示例2 - 插槽1" tip="根据 molds 中的 key 或者 slot_key 定义插槽">
       <FormLayout ref="formRef_02" :molds="molds_02" inline :rules="rules_02" label-width="100px">
         <template v-slot:title="prop">
           <el-input v-model="prop.model.title" />
@@ -32,10 +30,9 @@
       </div>
 
       <PreCode path="layout_form/m_02/code" />
-    </el-card>
+    </BoxCard>
 
-    <el-card shadow="never" class="el-box-card">
-      <div slot="header">示例3 - 插槽2<span>通过 custom 自定义所有节点</span></div>
+    <BoxCard title="示例3 - 插槽2" tip="通过 custom 自定义所有节点">
       <FormLayout ref="formRef_03" :molds="molds_03" :rules="rules_03" label-width="100px" inline custom>
         <template v-slot="prop">
           <span>{{ prop.model.title }}</span>
@@ -49,7 +46,12 @@
       </div>
 
       <PreCode path="layout_form/m_03/code" />
-    </el-card>
+    </BoxCard>
+
+    <BoxCard title="文档">
+      <h3 class="doc-title">Attributes</h3>
+      <Docs :data="docs" more="form#form-attributes" />
+    </BoxCard>
   </div>
 </template>
 
@@ -59,13 +61,13 @@ import M_02 from './m_02/mixin'
 import M_03 from './m_03/mixin'
 
 export default {
-  mixins: [M_01, M_02, M_03]
+  mixins: [M_01, M_02, M_03],
+
+  created() {
+    this.docs = [
+      { parame: 'models', explain: '显示form表单项', type: 'array', optVal: '', defVal: '' },
+      { parame: 'rules', explain: '表单验证规则', type: 'object', optVal: '', defVal: '' }
+    ]
+  }
 }
 </script>
-
-<style lang="scss" scoped>
-.button-group {
-  margin: 30px;
-  text-align: center;
-}
-</style>

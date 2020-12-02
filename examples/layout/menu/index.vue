@@ -1,6 +1,6 @@
 <template>
   <ul class="app-menu">
-    <li class="logo-wapper">
+    <li class="logo-wapper" @click="link = '/'">
       <svg viewBox="0 0 218 112">
         <g transform="translate(-11.000000, -64.000000)" fill="#FA6400" fill-rule="nonzero">
           <path
@@ -51,7 +51,7 @@ export default {
     padding: 13px 8px;
     color: #a4a8b2;
     font-size: 15px;
-    border-radius: 8px;
+    border-radius: 4px;
     transition: background-color 0.2s, color 0.2s;
     cursor: pointer;
 

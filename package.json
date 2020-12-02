@@ -1,6 +1,6 @@
 {
   "name": "qzui",
-  "version": "0.3.27",
+  "version": "0.3.28",
   "description": "基于 ElementUI 二次封装",
   "main": "lib/qzui.common.js",
   "files": [
@@ -17,7 +17,7 @@
   "homepage": "https://github.com/qi-zai/qzui-element#readme",
   "license": "MIT",
   "scripts": {
-    "build": "vue-cli-service build",
+    "build:docs": "vue-cli-service build",
     "dev": "vue-cli-service serve",
     "lib": "rm -rf lib && vue-cli-service build --target lib --name qzui --dest lib packages/index.js",
     "lint": "vue-cli-service lint"

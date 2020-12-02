@@ -1,6 +1,7 @@
 const path = require('path')
 
 module.exports = {
+  outputDir: 'docs',
   pages: {
     index: {
       entry: 'examples/main.js',
@@ -9,12 +10,13 @@ module.exports = {
     }
   },
   configureWebpack: {
-    // externals: {
-    //   vue: 'Vue',
-    //   vuex: 'Vuex',
-    //   axios: 'axios',
-    //   'vue-router': 'VueRouter'
-    // }
+    externals: {
+      vue: 'Vue',
+      axios: 'axios',
+      'vue-router': 'VueRouter',
+      'element-ui': 'ELEMENT',
+      hljs: 'hljs'
+    }
   },
   chainWebpack: (config) => {
     config.resolve.alias.set('@', path.resolve('examples')).set('~', path.resolve('packages'))
@@ -23,7 +25,7 @@ module.exports = {
       .rule('eslint')
       .exclude.add(path.resolve('lib'))
       .end()
-      .exclude.add(path.resolve('examples/docs'))
+      .exclude.add(path.resolve('docs'))
       .end()
 
     config.module

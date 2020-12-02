@@ -1,17 +1,17 @@
 <template>
   <div>
-    <UploadMedia v-model="list" size="60px" multiple />
+    <BoxCard title="示例">
+      <UploadMedia v-model="data" size="60px" multiple />
+
+      <PreCode path="upload_media/m_01/code" />
+    </BoxCard>
   </div>
 </template>
 
 <script>
-import UploadMedia from '~/upload-media'
+import M_01 from './m_01/mixin'
 
 export default {
-  components: { UploadMedia },
-
-  data: () => ({
-    list: ''
-  })
+  mixins: [M_01]
 }
 </script>
