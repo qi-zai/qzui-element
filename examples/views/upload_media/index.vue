@@ -55,7 +55,7 @@ export default {
       { parame: 'type', explain: '组件以什么类型显示', type: 'string', options: 'text/image/video', default: 'text' },
       { parame: 'uploadLabel', explain: '上传按钮文案', type: 'string', default: '上传' },
       { parame: 'autoUpload', explain: '是否立即上传，必须与 on-upload 同时使用', type: 'boolean', default: 'false' },
-      { parame: 'size', explain: '最多上传数量', type: 'number', default: 'Infinity' },
+      { parame: 'max', explain: '最多上传数量', type: 'number', default: 'Infinity' },
 
       { parame: 'multiple', explain: '是否多选', type: 'boolean', default: 'false' },
       { parame: 'readonly', explain: '控件以只读模式显示', type: 'boolean', default: 'false' }

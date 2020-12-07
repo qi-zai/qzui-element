@@ -14,7 +14,7 @@
     </div>
 
     <template v-if="!readonly">
-      <button v-if="file_list.length < (multiple ? size : 1)" class="upload_media_item upload_media_action" @click="pushFile">
+      <button v-if="file_list.length < (multiple ? max : 1)" class="upload_media_item upload_media_action" @click="pushFile">
         <slot name="upload-label">{{ uploadLabel }}</slot>
       </button>
     </template>
@@ -32,7 +32,7 @@ export default {
     accept: { type: String, default: null },
     type: { type: String, default: 'text' },
     uploadLabel: { type: String, default: '上传' },
-    size: { type: Number, default: Infinity },
+    max: { type: Number, default: Infinity },
     autoUpload: Boolean,
 
     readonly: Boolean,
