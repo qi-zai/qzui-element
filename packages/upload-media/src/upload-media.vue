@@ -28,7 +28,7 @@ export default {
   name: 'UploadMedia',
 
   props: {
-    value: { type: [Object, Array], default: () => [] },
+    value: { type: Array, default: () => [] },
     accept: { type: String, default: null },
     type: { type: String, default: 'text' },
     uploadLabel: { type: String, default: '上传' },
@@ -46,13 +46,13 @@ export default {
   watch: {
     value: {
       handler(v) {
-        this.file_list = Array.isArray(v) ? this.value : [v]
+        this.file_list = this.value
       },
       immediate: true
     },
 
     file_list(v) {
-      this.$emit('input', this.multiple ? v : v[0])
+      this.$emit('input', v)
     }
   },
 
@@ -70,20 +70,26 @@ export default {
 
     pushFile() {
       this.upload((file) => {
-        this.file_list.push(this.toLink(file))
+        if (file) {
+          this.file_list.push(this.toLink(file))
+          this.$emit('on-change', file)
+        }
         this.loading = false
       })
     },
 
     replaceFile(index) {
       this.upload((file) => {
-        this.file_list.splice(index, 1, this.toLink(file))
+        if (file) {
+          this.file_list.splice(index, 1, this.toLink(file))
+          this.$emit('on-change', file)
+        }
         this.loading = false
       })
     },
 
     deleteFile(index) {
-      this.file_list.splice(index, 1)
+      this.$emit('on-change', this.file_list.splice(index, 1))
     }
   }
 }

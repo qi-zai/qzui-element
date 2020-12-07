@@ -2,7 +2,7 @@
   <div>
     <BoxCard title="示例1 - 基础">
       <UploadMedia />
-      <UploadMedia type="image" accept="image/jpg" auto-upload @on-upload="upload_01" />
+      <UploadMedia type="image" accept="image/jpg" />
       <UploadMedia type="video" accept="video/mp4" />
 
       <PreCode path="upload_media/m_01/code" />
@@ -50,7 +50,7 @@ export default {
 
   created() {
     this.docs = [
-      { parame: 'value', explain: '展示的数据', type: 'string/array' },
+      { parame: 'value', explain: '展示的数据', type: 'array' },
       { parame: 'accept', explain: '上传的文件类型', type: 'string' },
       { parame: 'type', explain: '组件以什么类型显示', type: 'string', options: 'text/image/video', default: 'text' },
       { parame: 'uploadLabel', explain: '上传按钮文案', type: 'string', default: '上传' },

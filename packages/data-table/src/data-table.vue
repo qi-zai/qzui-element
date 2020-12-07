@@ -37,8 +37,8 @@ export default {
     handleTableColumn(h) {
       const cols = []
 
-      for (let i = 0, col; (col = this.column[i]); i++) {
-        if (col.isShow === false) continue
+      for (const { display = true, ...col } of this.column) {
+        if (!display) continue
 
         let scopedSlots = null
         if (col.prop && this.$scopedSlots[col.prop]) {
@@ -82,8 +82,8 @@ export default {
           default: (attrs) => {
             const arr = []
             const list = typeof col.actions === 'function' ? col.actions.call(this.$parent, attrs) : col.actions
-            for (const { display, ...props } of list) {
-              if (!props.display) continue
+            for (const { display = true, ...props } of list) {
+              if (!display) continue
               arr.push(
                 h(
                   'el-button',

@@ -133,10 +133,15 @@ export default {
     },
 
     fetchLayout(h) {
+      const childs = []
+      for (const { display = true, ...props } of this.filters) {
+        if (!display) continue
+        childs.push(this.fetchItem(h, props))
+      }
       return h(
         'el-form',
         { class: 'qzui-filter-layout', attrs: { size: this.size, inline: true, labelWidth: this.labelWidth } },
-        this.filters.map((props) => this.fetchItem(h, props))
+        childs
       )
     },
 

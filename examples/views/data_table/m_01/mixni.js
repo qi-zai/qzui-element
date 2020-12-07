@@ -26,7 +26,7 @@ export default {
     actions_01(props) {
       return [
         { icon: 'el-icon-edit', label: props.row.enable ? '启用' : '禁用', click: this.handleEnable_01 },
-        { icon: 'el-icon-edit', label: '这是一个隐藏按钮', style: { display: 'none' } }
+        { icon: 'el-icon-edit', label: '这是一个隐藏按钮', display: false }
       ]
     },
 
