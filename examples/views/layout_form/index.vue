@@ -65,8 +65,8 @@ export default {
 
   created() {
     this.docs = [
-      { parame: 'models', explain: '显示form表单项', type: 'array', optVal: '', defVal: '' },
-      { parame: 'rules', explain: '表单验证规则', type: 'object', optVal: '', defVal: '' }
+      { parame: 'models', explain: '显示form表单项', type: 'array', options: '', default: '' },
+      { parame: 'rules', explain: '表单验证规则', type: 'object', options: '', default: '' }
     ]
   }
 }

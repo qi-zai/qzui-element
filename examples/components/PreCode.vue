@@ -27,6 +27,7 @@ export default {
 <style lang="scss" scoped>
 .code__wapper {
   &__inner {
+    margin-top: 15px;
     padding: 0 15px 15px;
     background-color: #f4f7fa;
     border-radius: 3px;

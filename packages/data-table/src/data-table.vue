@@ -79,19 +79,26 @@ export default {
         }
       } else if (col.actions) {
         return {
-          default: (attrs) =>
-            (typeof col.actions === 'function' ? col.actions.call(this.$parent, attrs) : col.actions).map((props) =>
-              h(
-                'el-button',
-                {
-                  style: props.style,
-                  props: { size: this.size, type: 'text', ...props },
-                  class: props.class,
-                  on: { click: () => props.click && props.click(attrs, props) }
-                },
-                props.label
+          default: (attrs) => {
+            const arr = []
+            const list = typeof col.actions === 'function' ? col.actions.call(this.$parent, attrs) : col.actions
+            for (const { display, ...props } of list) {
+              if (!props.display) continue
+              arr.push(
+                h(
+                  'el-button',
+                  {
+                    style: props.style,
+                    props: { size: this.size, type: 'text', ...props },
+                    class: props.class,
+                    on: { click: () => props.click && props.click(attrs, props) }
+                  },
+                  props.label
+                )
               )
-            )
+            }
+            return arr
+          }
         }
       }
 

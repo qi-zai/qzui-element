@@ -11,11 +11,11 @@
     </thead>
     <tbody>
       <tr v-for="(v, i) in data" :key="i" class="doc-attr">
-        <td>{{ v.parame }}</td>
-        <td>{{ v.explain }}</td>
-        <td>{{ v.type }}</td>
-        <td>{{ v.optVal }}</td>
-        <td>{{ v.defVal }}</td>
+        <td v-html="v.parame" />
+        <td v-html="v.explain" />
+        <td v-html="v.type" />
+        <td v-html="v.options" />
+        <td v-html="v.default" />
       </tr>
       <tr v-if="more" class="more">
         <td colspan="5">
