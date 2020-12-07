@@ -54,11 +54,7 @@ export default {
             { mold: 'button', type: 'primary', value: '搜索', plain: false, round: true },
             { mold: 'button', type: 'primary', value: '重置', plain: false, round: true, click: this.reset }
           ]
-        },
-        [
-          { mold: 'button', type: 'primary', value: '搜索', plain: false, round: true },
-          { mold: 'button', type: 'primary', value: '重置', plain: false, round: true, click: this.reset }
-        ]
+        }
       ]
     }
   },

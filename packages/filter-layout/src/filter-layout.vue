@@ -134,8 +134,8 @@ export default {
 
     fetchLayout(h) {
       const childs = []
-      for (const { display = true, ...props } of this.filters) {
-        if (!display) continue
+      for (const props of this.filters) {
+        if (props.display === false) continue
         childs.push(this.fetchItem(h, props))
       }
       return h(
@@ -149,7 +149,7 @@ export default {
       return h(
         'el-form-item',
         { class: { not__empty__label: props.label && props.label.trim() }, props: { label: props.label, prop: props.key } },
-        [this.comps[Array.isArray(props) ? 'buttonGroup' : props.mold](h, props)]
+        [this.comps[props.mold](h, props)]
       )
     }
   },
