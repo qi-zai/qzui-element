@@ -41,8 +41,9 @@ export default {
         if (col.display === false) continue
 
         let scopedSlots = null
-        if (col.prop && this.$scopedSlots[col.prop]) {
-          scopedSlots = { default: this.$scopedSlots[col.prop] }
+        const key = col.slot_key || col.prop
+        if (key && this.$scopedSlots[key]) {
+          scopedSlots = { default: this.$scopedSlots[key] }
         } else {
           scopedSlots = col.labelCallback
             ? this.handleTableColumnScopedSlots(h, col)

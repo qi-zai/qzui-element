@@ -7,9 +7,7 @@ export default {
   props: {
     filters: { type: Array, default: () => [] },
     size: { type: String, default: null },
-    labelWidth: { type: String, default: null },
-    columnSpan: { type: Number, default: null },
-    gutter: { type: Number, default: null }
+    labelWidth: { type: String, default: null }
   },
 
   data() {
@@ -18,7 +16,7 @@ export default {
         input: (h, props) =>
           h('el-input', {
             attrs: { placeholder: '请输入...', size: this.size, ...props },
-            on: { ...props.on, input: (event) => (props.value = event) }
+            on: { input: (event) => (props.value = event), ...props.on }
           }),
 
         button: (h, props) =>
@@ -26,7 +24,7 @@ export default {
             'el-button',
             {
               props: { size: this.size, plain: true, ...props },
-              on: { click: (...args) => props.click && props.click(...args) }
+              on: { click: (...args) => props.click && props.click(...args), ...props.on }
             },
             props.value
           ),
@@ -50,7 +48,7 @@ export default {
             'el-select',
             {
               attrs: { placeholder: '请选择...', size: this.size, ...props },
-              on: { input: (event) => (props.value = event) }
+              on: { input: (event) => (props.value = event), ...props.on }
             },
             childs
           )
@@ -69,9 +67,7 @@ export default {
               valueFormat: this.dateValueFormat(props.type),
               ...props
             },
-            on: {
-              input: (event) => (props.value = event)
-            }
+            on: { input: (event) => (props.value = event), ...props.on }
           }),
 
         buttonGroup: (h, props) =>
@@ -80,21 +76,11 @@ export default {
             (props.buttons || props).map((item) => this.comps.button(h, item))
           ),
 
-        dropdown: (h, props) =>
-          h('el-dropdown', [
-            h('el-button', { props: { size: this.size, ...props.button } }, [
-              props.button.value,
-              h('i', { class: 'el-icon-arrow-down el-icon--right' })
-            ]),
-            h(
-              'el-dropdown-menu',
-              props.options &&
-                props.options.map((v, i) => h('el-dropdown-item', { nativeOn: { click: () => props.optionClick(i, v) } }, v))
-            )
-          ]),
-
         cascader: (h, props) =>
-          h('el-cascader', { props: { size: this.size, ...props }, on: { input: (event) => (props.value = event) } }),
+          h('el-cascader', {
+            props: { size: this.size, ...props },
+            on: { input: (event) => (props.value = event), ...props.on }
+          }),
 
         custom: (h, props) =>
           h(props.component, { attrs: { size: this.size, ...props }, on: { input: (event) => (props.value = event) } })

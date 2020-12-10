@@ -1,15 +1,14 @@
-export const html = `<FilterLayout ref="filters" :filters="filters" label-width="80px" />`
-
-export const js = `import CustomComponent from '@/components/Custom'
+/* eslint-disable no-console */
+import CustomComponent from '@/components/Custom'
 
 export default {
   data() {
     return {
       filters: [
-        { key: 'filter_input', mold: 'input', label: '输入', value: '' },
-        { key: 'filter_date', label: '日期', mold: 'date', type: 'daterange', value: '' },
+        { key: 'filter_input', mold: 'input', label: '输入', value: '', on: { focus: this.inputFocus } },
+        { key: 'date1,date2', label: '日期', mold: 'date', type: 'daterange', value: ['2020-08-08', '2020-08-30'] },
         {
-          key: 'filter_select',
+          key: 'select1.select2',
           mold: 'select',
           label: '下拉框',
           value: 'value1',
@@ -17,7 +16,7 @@ export default {
           options: []
         },
         {
-          key: 'filter_select2',
+          key: 'filter_select',
           mold: 'select',
           label: '下拉框',
           value: 'value2',
@@ -35,12 +34,6 @@ export default {
         { key: 'custom', mold: 'custom', value: [1, 2, 4], label: '自定义', component: CustomComponent },
         { mold: 'button', label: ' ', value: '取filters中的值', type: 'primary', icon: 'el-icon-edit', click: this.fetchData },
         { mold: 'button', value: '查询中', type: 'primary', loading: true, plain: false, click: this.fetchData },
-        {
-          mold: 'dropdown',
-          button: { value: '更多操作', type: 'primary', plain: true },
-          options: ['删除', '添加'],
-          optionClick: this.optionClick
-        },
         {
           mold: 'buttonGroup',
           buttons: [
@@ -61,8 +54,12 @@ export default {
   },
 
   methods: {
+    inputFocus() {
+      console.log('inputFocus')
+    },
+
     clickHandle() {
-      alert('你的点击我以收到')
+      console.log('你的点击我以收到')
     },
 
     fetchData() {
@@ -70,13 +67,8 @@ export default {
       alert(JSON.stringify(data, '', 2))
     },
 
-    optionClick(index, label) {
-      alert(\`你点击了【\${label}】按钮，options中的索引为：\${index}\`)
-    },
-
     reset() {
       this.$refs.filters.reset()
     }
   }
 }
-`

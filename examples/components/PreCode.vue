@@ -66,7 +66,7 @@ export default {
     margin: 0;
     padding: 8px;
     line-height: 18px;
-    font-size: 14px;
+    font-size: 13px;
     max-height: 50vh;
     overflow: auto;
   }

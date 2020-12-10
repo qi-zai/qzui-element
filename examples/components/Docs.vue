@@ -1,29 +1,24 @@
 <template>
-  <table class="docs-table">
-    <thead>
-      <tr>
-        <th>参数</th>
-        <th>说明</th>
-        <th>类型</th>
-        <th>可选值</th>
-        <th>默认值</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr v-for="(v, i) in data" :key="i" class="doc-attr">
-        <td v-html="v.parame" />
-        <td v-html="v.explain" />
-        <td v-html="v.type" />
-        <td v-html="v.options" />
-        <td v-html="v.default" />
-      </tr>
-      <tr v-if="more" class="more">
-        <td colspan="5">
-          <a :href="'https://element.eleme.cn/#/zh-CN/component/' + more" target="_blank">... 更多 ...</a>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <div>
+    <h3 v-if="title" :id="title" class="doc-title">{{ title }}</h3>
+    <table class="docs-table">
+      <thead>
+        <tr>
+          <th v-for="(v, k) in column" :key="k">{{ v }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="(item, i) in data" :key="i" class="doc-attr">
+          <td v-for="(v, k) in column" :key="k" v-html="item[k]" />
+        </tr>
+        <tr v-if="more" class="more">
+          <td colspan="5">
+            <a :href="'https://element.eleme.cn/#/zh-CN/component/' + more" target="_blank">... 更多 ...</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </template>
 
 <script>
@@ -31,13 +26,19 @@ export default {
   name: 'Docs',
 
   props: {
+    column: {
+      type: Array,
+      default: () => ({ parame: '参数', explain: '说明', type: '类型', options: '可选值', default: '默认值' })
+    },
+    title: { type: Array, default: null },
+
     data: { type: Array, required: true },
     more: { type: String, default: null }
   }
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .doc-title {
   margin: 15px 0;
   padding-left: 15px;
@@ -50,7 +51,7 @@ export default {
   border-collapse: collapse;
   width: 100%;
   background-color: #fff;
-  font-size: 14px;
+  font-size: 12px;
   margin-bottom: 30px;
   line-height: 1.5em;
 

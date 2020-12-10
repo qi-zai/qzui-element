@@ -49,8 +49,8 @@
     </BoxCard>
 
     <BoxCard title="文档">
-      <h3 class="doc-title">Attributes</h3>
-      <Docs :data="docs" more="form#form-attributes" />
+      <Docs title="Attributes" :data="_Attributes" more="form#form-attributes" />
+      <Docs title="Models" :data="_Models" more="form#form-attributes" />
     </BoxCard>
   </div>
 </template>
@@ -64,9 +64,16 @@ export default {
   mixins: [M_01, M_02, M_03],
 
   created() {
-    this.docs = [
+    this._Attributes = [
       { parame: 'models', explain: '显示form表单项', type: 'array', options: '', default: '' },
       { parame: 'rules', explain: '表单验证规则', type: 'object', options: '', default: '' }
+    ]
+
+    this._Models = [
+      // { parame: 'label', explain: '控件的label名', type: 'array', options: '', default: '' },
+      // { parame: 'key', explain: '显示form表单项', type: 'array', options: '', default: '' },
+      // { parame: 'slot_key', explain: '显示form表单项', type: 'array', options: '', default: '' },
+      // { parame: 'value', explain: '显示form表单项', type: 'array', options: '', default: '' }
     ]
   }
 }

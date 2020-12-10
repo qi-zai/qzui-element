@@ -31,6 +31,6 @@ module.exports = {
     'vue/no-v-html': 0,
     'unicorn/prefer-starts-ends-with': 0,
     'require-await': 1,
-    'standard/no-callback-literal': 0
+    'standard/no-callback-literal': 0,
   }
 }

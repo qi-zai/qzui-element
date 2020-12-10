@@ -1,7 +1,7 @@
 <template>
   <div>
     <BoxCard title="示例1 - 基础">
-      <UploadMedia />
+      <UploadMedia readonly />
       <UploadMedia type="image" accept="image/jpg" />
       <UploadMedia type="video" accept="video/mp4" />
 
@@ -36,8 +36,7 @@
     </BoxCard>
 
     <BoxCard title="文档">
-      <h3 class="doc-title">Attributes</h3>
-      <Docs :data="docs" />
+      <Docs title="Attributes" :data="docs" />
     </BoxCard>
   </div>
 </template>

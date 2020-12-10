@@ -1,89 +1,69 @@
 <template>
-  <BoxCard title="示例">
-    <FilterLayout ref="filters" :filters="filters" label-width="80px" />
+  <div>
+    <BoxCard title="示例">
+      <FilterLayout ref="filters" :filters="filters" label-width="80px" />
 
-    <PreCode path="layout_filter/code" />
-  </BoxCard>
+      <PreCode path="layout_filter/m_01/code" />
+    </BoxCard>
+
+    <BoxCard title="文档">
+      <Docs title="Attributes" :data="_Attributes" />
+
+      <Docs title="filters" :data="_Filters" />
+
+      <Docs
+        title="Refs-Events"
+        :data="_RefsEvents"
+        :column="{ attr: '属性名称', type: '类型', explain: '说明', parame: '参数说明' }"
+      />
+    </BoxCard>
+  </div>
 </template>
 
 <script>
-import CustomComponent from '@/components/Custom'
+import M_01 from './m_01/mixin'
 
 export default {
-  data() {
-    return {
-      filters: [
-        { key: 'filter_input', mold: 'input', label: '输入', value: '' },
-        { key: 'filter_date', label: '日期', mold: 'date', type: 'daterange', value: '' },
-        {
-          key: 'filter_select',
-          mold: 'select',
-          label: '下拉框',
-          value: 'value1',
-          props: { value: 'id', label: 'name' },
-          options: []
-        },
-        {
-          key: 'filter_select2',
-          mold: 'select',
-          label: '下拉框',
-          value: 'value2',
-          props: { value: 'id', label: 'name' },
-          options: { value1: '值1', value2: '值2' }
-        },
-        {
-          key: 'cascader',
-          mold: 'cascader',
-          label: '级联框',
-          value: ['100', '100100'],
-          clearable: true,
-          options: [{ value: '100', label: '100', children: [{ value: '100100', label: '100100' }] }]
-        },
-        { key: 'custom', mold: 'custom', value: [1, 2, 4], label: '自定义', component: CustomComponent },
-        { mold: 'button', label: ' ', value: '取filters中的值', type: 'primary', icon: 'el-icon-edit', click: this.fetchData },
-        { mold: 'button', value: '查询中', type: 'primary', loading: true, plain: false, click: this.fetchData },
-        {
-          mold: 'dropdown',
-          button: { value: '更多操作', type: 'primary', plain: true },
-          options: ['删除', '添加'],
-          optionClick: this.optionClick
-        },
-        {
-          mold: 'buttonGroup',
-          buttons: [
-            { mold: 'button', type: 'primary', value: '搜索', plain: false, round: true },
-            { mold: 'button', type: 'primary', value: '重置', plain: false, round: true, click: this.reset }
-          ]
-        }
-      ]
-    }
-  },
+  mixins: [M_01],
 
-  mounted() {
-    this.filters[1].options = [
-      { id: 'value1', name: 'label1', disabled: true },
-      { id: 'value2', name: 'label2' },
-      { id: 'value3', name: 'label3' }
+  created() {
+    this._Attributes = [
+      { parame: 'filters', explain: '显示筛选器项，详细配置看下文', type: 'array', options: '', default: '' },
+      { parame: 'size', explain: '所有筛选器的大小', type: 'String', options: '', default: '' },
+      { parame: 'label-width', explain: 'label宽度', type: 'String', options: '', default: '' }
     ]
-  },
 
-  methods: {
-    clickHandle() {
-      alert('你的点击我以收到')
-    },
+    this._Filters = [
+      {
+        parame: 'key',
+        explain:
+          '与 getValues() 搭配，效果更好<br>例1: "a.b" => { a: { b: "value" } }<br>例1: "c,d,..." => { c: value[0], d: value[1],... }，注意：此时value必须是Array<br>详情请看示例',
+        type: 'String'
+      },
+      { parame: 'label', explain: '控件的label名', type: 'String' },
+      { parame: 'value', explain: '控件的值', type: 'any' },
+      {
+        parame: 'mold',
+        explain: '控件以什么模型展示',
+        type: 'String',
+        options: 'input/button/select/date/<br/>cascader/buttonGroup/custom',
+        default: ''
+      },
+      { parame: 'component', explain: '自定义展示控件，仅在mold为custom下生效', type: 'VNode' },
+      { parame: 'options', explain: '下拉项，仅在mold为select/cascader下生效', type: 'String' },
+      { parame: 'props', explain: '定义下拉项的key，仅在mold为select/cascader下生效', type: 'String' },
+      { parame: 'on', explain: '控件的Event事件', type: 'Object' }
+    ]
 
-    fetchData() {
-      const data = this.$refs.filters.getValues()
-      alert(JSON.stringify(data, '', 2))
-    },
-
-    optionClick(index, label) {
-      alert(`你点击了【${label}】按钮，options中的索引为：${index}`)
-    },
-
-    reset() {
-      this.$refs.filters.reset()
-    }
+    this._RefsEvents = [
+      {
+        attr: 'getValues(option)',
+        type: 'Function',
+        explain: '获取带key的 mold 值，当 key=‘a.b’，获取的数据格式为 { a: { b: ‘value’ } }',
+        parame: 'option: { origin: "origin", key: "key" }，origin: 数据源, key: 取值的key'
+      },
+      { attr: 'reset', type: 'Function', explain: '重置所有筛选器的值' }
+    ]
   }
 }
 </script>

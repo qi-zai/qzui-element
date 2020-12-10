@@ -1,6 +1,6 @@
 {
   "name": "qzui",
-  "version": "0.3.36",
+  "version": "0.3.38",
   "description": "基于 ElementUI 二次封装",
   "main": "lib/qzui.common.js",
   "files": [
@@ -20,6 +20,7 @@
     "build:docs": "vue-cli-service build",
     "dev": "vue-cli-service serve",
     "lib": "rm -rf lib && vue-cli-service build --target lib --name qzui --dest lib packages/index.js",
+    "lib2": "rm -rf lib2 && vue-cli-service build --target lib --name qzui --dest lib2 packages2/index.js",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {

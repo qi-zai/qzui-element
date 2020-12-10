@@ -1,3 +1,6 @@
+<template>
+  <el-cascader v-bind="attrs" />
+</template>
 <script>
 let id = 0
 
@@ -24,11 +27,10 @@ export default {
     }
   },
 
-  render(h) {
-    return h('el-cascader', {
-      attrs: { ...this.$attrs, props: this.props },
-      on: { input: (event) => this.$emit('input', event) }
-    })
+  computed: {
+    attrs() {
+      return { ...this.$attrs, props: this.props }
+    }
   }
 }
 </script>

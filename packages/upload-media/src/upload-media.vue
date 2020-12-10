@@ -192,6 +192,11 @@ export default {
         white-space: nowrap;
         text-overflow: ellipsis;
         overflow: hidden;
+
+        &[href] {
+          color: #0096fa;
+          text-decoration: underline;
+        }
       }
 
       &.upload_media_action {
