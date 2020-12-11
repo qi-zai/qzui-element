@@ -1,6 +1,6 @@
 <template>
   <div class="code__wapper">
-    <div class="code__wapper__inner" code-title="代码">
+    <div :class="{ code__wapper__inner: !noWapper, pre__scroll: !noScroll }" code-title="代码">
       <div v-for="(v, k) in code" :key="k" :lang="k" class="code__preview">
         <highlightjs :language="k" :code="v" />
       </div>
@@ -13,12 +13,16 @@ export default {
   name: 'PreCode',
 
   props: {
-    path: { type: String, required: true }
+    path: { type: String, default: null },
+    codes: { type: Object, default: null },
+
+    noWapper: Boolean,
+    noScroll: Boolean
   },
 
   computed: {
     code() {
-      return require('@/views/' + this.path)
+      return this.codes || (this.path && require('@/views/' + this.path)) || {}
     }
   }
 }
@@ -67,6 +71,9 @@ export default {
     padding: 8px;
     line-height: 18px;
     font-size: 13px;
+  }
+
+  .pre__scroll pre {
     max-height: 50vh;
     overflow: auto;
   }

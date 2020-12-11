@@ -1,0 +1,19 @@
+{
+  "name": "qzui",
+  "version": "0.3.50",
+  "description": "基于 ElementUI^2.12.0 二次封装",
+  "main": "lib/qzui.common.js",
+  "files": [
+    "lib"
+  ],
+  "author": {
+    "name": "qi-zai",
+    "email": "15248448516@163.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/qi-zai/qzui-element.git"
+  },
+  "homepage": "https://qi-zai.github.io/qzui-element",
+  "license": "MIT"
+}

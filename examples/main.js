@@ -4,16 +4,13 @@ import Docs from '@/components/Docs'
 
 import App from './App.vue'
 import router from './router'
-import qzui from '~/index'
 
-import '~/styles/index.scss'
 import '@/assets/scss/index.scss'
 
 Vue.component('BoxCard', BoxCard)
 Vue.component('PreCode', PreCode)
 Vue.component('Docs', Docs)
 
-Vue.use(qzui)
 Vue.use(hljs.vuePlugin)
 
 Vue.prototype.$ELEMENT = { size: 'small', zIndex: 300 }

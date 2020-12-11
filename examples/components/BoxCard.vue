@@ -1,6 +1,6 @@
 <template>
   <div class="box-card">
-    <div class="box-card__header">
+    <div v-if="title" class="box-card__header">
       <slot name="header">
         {{ title }} <span class="tip">{{ tip }}</span>
       </slot>

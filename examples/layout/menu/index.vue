@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import { version } from '../../../package.json'
+import { version } from '../../../libs/v0/package.json'
 
 export default {
   data: () => ({
