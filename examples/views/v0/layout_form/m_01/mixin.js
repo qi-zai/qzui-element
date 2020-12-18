@@ -6,7 +6,7 @@ export default {
         { label: '作者', key: 'author', mold: 'input', value: 'qizaicc' },
         { label: '创建方式', key: 'createMode.key', dict: 'CREATE_MODE', mold: 'select', options: null },
         { label: 'cascader', key: 'cascader3', mold: 'cascader', options: null },
-        { label: '来源', key: 'excerpt', mold: 'input' },
+        { label: '来源', key: 'excerpt', mold: 'input', display: false },
         { label: '显示状态', key: 'status.key', options: null, dict: 'DISPLAY_STATUS', mold: 'select' },
         { label: '日期', key: 'date,date2', mold: 'date', type: 'daterange' },
         { label: '作者', key: 'authortextarea', mold: 'input', type: 'textarea', class: 'box-block' }

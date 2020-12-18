@@ -147,6 +147,8 @@ export default {
     },
 
     fetchSlot(h, props) {
+      if (props.display === false) return
+
       let childs = null
       if (this.custom) {
         childs = this.$scopedSlots.default({ cell: props, model: this.model })
