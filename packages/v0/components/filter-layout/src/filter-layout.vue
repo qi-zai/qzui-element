@@ -10,81 +10,79 @@ export default {
     labelWidth: { type: String, default: null }
   },
 
-  data() {
-    return {
-      comps: Object.freeze({
-        input: (h, props) =>
-          h('el-input', {
-            attrs: { placeholder: '请输入...', size: this.size, ...props },
-            on: { input: (event) => (props.value = event), ...props.on }
-          }),
+  created() {
+    this.comps = {
+      input: (h, props) =>
+        h('el-input', {
+          attrs: { placeholder: '请输入...', size: this.size, ...props },
+          on: { input: (event) => (props.value = event), ...props.on }
+        }),
 
-        button: (h, props) =>
-          h(
-            'el-button',
-            {
-              props: { size: this.size, plain: true, ...props },
-              on: { click: (...args) => props.click && props.click(...args), ...props.on }
-            },
-            props.value
-          ),
+      button: (h, props) =>
+        h(
+          'el-button',
+          {
+            props: { size: this.size, plain: true, ...props },
+            on: { click: (...args) => props.click && props.click(...args), ...props.on }
+          },
+          props.value
+        ),
 
-        select: (h, props) => {
-          const childs = []
-          if (props.options) {
-            for (const k in props.options) {
-              childs.push(
-                h('el-option', {
-                  props: {
-                    value: props.options[k][props.props?.value || 'value'] || k,
-                    label: props.options[k][props.props?.label || 'label'] || props.options[k],
-                    disabled: props.options[k].disabled
-                  }
-                })
-              )
-            }
+      select: (h, props) => {
+        const childs = []
+        if (props.options) {
+          for (const k in props.options) {
+            childs.push(
+              h('el-option', {
+                props: {
+                  value: props.options[k][props.props?.value || 'value'] || k,
+                  label: props.options[k][props.props?.label || 'label'] || props.options[k],
+                  disabled: props.options[k].disabled
+                }
+              })
+            )
           }
-          return h(
-            'el-select',
-            {
-              attrs: { placeholder: '请选择...', size: this.size, ...props },
-              on: { input: (event) => (props.value = event), ...props.on }
-            },
-            childs
-          )
-        },
-
-        date: (h, props) =>
-          h('el-date-picker', {
-            style: props.style,
-            attrs: {
-              type: 'date',
-              placeholder: '选择日期',
-              'range-separator': '',
-              'start-placeholder': '开始日期',
-              'end-placeholder': '结束日期',
-              size: this.size,
-              valueFormat: this.dateValueFormat(props.type),
-              ...props
-            },
+        }
+        return h(
+          'el-select',
+          {
+            attrs: { placeholder: '请选择...', size: this.size, ...props },
             on: { input: (event) => (props.value = event), ...props.on }
-          }),
+          },
+          childs
+        )
+      },
 
-        buttonGroup: (h, props) =>
-          h(
-            'el-button-group',
-            (props.buttons || props).map((item) => this.comps.button(h, item))
-          ),
+      date: (h, props) =>
+        h('el-date-picker', {
+          style: props.style,
+          attrs: {
+            type: 'date',
+            placeholder: '选择日期',
+            'range-separator': '',
+            'start-placeholder': '开始日期',
+            'end-placeholder': '结束日期',
+            size: this.size,
+            valueFormat: this.dateValueFormat(props.type),
+            ...props
+          },
+          on: { input: (event) => (props.value = event), ...props.on }
+        }),
 
-        cascader: (h, props) =>
-          h('el-cascader', {
-            props: { size: this.size, ...props },
-            on: { input: (event) => (props.value = event), ...props.on }
-          }),
+      buttonGroup: (h, props) =>
+        h(
+          'el-button-group',
+          (props.buttons || props).map((item) => this.comps.button(h, item))
+        ),
 
-        custom: (h, props) =>
-          h(props.component, { attrs: { size: this.size, ...props }, on: { input: (event) => (props.value = event) } })
-      })
+      cascader: (h, props) =>
+        h('el-cascader', {
+          props: { size: this.size, ...props },
+          on: { input: (event) => (props.value = event), ...props.on }
+        }),
+
+      custom: (h, props) =>
+        h(props.component, { attrs: { size: this.size, ...props }, on: { input: (event) => (props.value = event) } })
     }
   },
 

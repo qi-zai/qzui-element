@@ -1,27 +1,25 @@
 export default {
-  data() {
-    return {
-      molds_01: Object.freeze([
-        { label: '专栏标题', key: 'title', mold: 'input', value: 'aaaaa' },
-        { label: '作者', key: 'author', mold: 'input', value: 'qizaicc' },
-        { label: '创建方式', key: 'createMode.key', dict: 'CREATE_MODE', mold: 'select', options: null },
-        { label: 'cascader', key: 'cascader3', mold: 'cascader', options: null },
-        { label: '来源', key: 'excerpt', mold: 'input', display: false },
-        { label: '显示状态', key: 'status.key', options: null, dict: 'DISPLAY_STATUS', mold: 'select' },
-        { label: '日期', key: 'date,date2', mold: 'date', type: 'daterange' },
-        { label: '作者', key: 'authortextarea', mold: 'input', type: 'textarea', class: 'box-block' }
-      ]),
+  created() {
+    this.molds_01 = [
+      { label: '专栏标题', key: 'title', mold: 'input', value: 'qizaicc' },
+      { label: '作者', key: 'author', mold: 'input', value: 'qizaicc' },
+      { label: '创建方式', key: 'createMode.key', mold: 'select', options: null },
+      { label: 'cascader', key: 'cascader3', mold: 'cascader', options: null },
+      { label: '来源', key: 'excerpt', mold: 'input', display: false },
+      { label: '显示状态', key: 'status.key', options: null, mold: 'select' },
+      { label: '日期', key: 'date,date2', mold: 'date', type: 'daterange' },
+      { label: '作者', key: 'authortextarea', mold: 'input', type: 'textarea', class: 'box-block' }
+    ]
 
-      rules_01: Object.freeze({
-        createMode_key: [{ required: true, message: '请选择' }],
-        startTime_endTime: [
-          {
-            required: true,
-            validator: (rule, value, cb) => cb(value && value.find((v) => v) ? undefined : new Error('请选择'))
-          }
-        ],
-        test: [{ required: true, message: '请输入' }]
-      })
+    this.rules_01 = {
+      createMode_key: [{ required: true, message: '请选择' }],
+      startTime_endTime: [
+        {
+          required: true,
+          validator: (rule, value, cb) => cb(value && value.find((v) => v) ? undefined : new Error('请选择'))
+        }
+      ],
+      test: [{ required: true, message: '请输入' }]
     }
   },
 
@@ -63,10 +61,8 @@ export default {
     },
 
     check_01() {
-      this.$refs.formRef_01.validate((data) => {
-        // eslint-disable-next-line no-console
-        console.log('success', data)
-      })
+      // eslint-disable-next-line no-console
+      this.$refs.formRef_01.validate(console.log)
     }
   }
 }

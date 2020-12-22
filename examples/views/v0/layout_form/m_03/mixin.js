@@ -1,19 +1,16 @@
 export default {
-  data() {
-    return {
-      molds_03: Object.freeze([{ label: '专栏标题', key: 'title', value: '' }]),
+  created() {
+    this.molds_03 = [{ label: '专栏标题', key: 'title', value: '' }]
 
-      rules_03: Object.freeze({
-        title: [{ required: true, message: '请输入专栏标题' }]
-      })
+    this.rules_03 = {
+      title: [{ required: true, message: '请输入专栏标题' }]
     }
   },
 
   methods: {
     check_03() {
-      this.$refs.formRef_03.validate((data) => {
-        alert(JSON.stringify(data, null, 2))
-      })
+      // eslint-disable-next-line no-console
+      this.$refs.formRef_03.validate(console.log)
     }
   }
 }

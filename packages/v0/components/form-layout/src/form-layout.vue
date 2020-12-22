@@ -13,75 +13,73 @@ export default {
   },
 
   data() {
-    const model = this.handleFormItem(this.molds)
-    return {
-      form_list: this.molds,
-      model,
-
-      comps: Object.freeze({
-        input: (h, mold) =>
-          h('el-input', {
-            attrs: { placeholder: '请输入...', ...mold, value: model[mold[this.fetchKey]] },
-            on: { ...mold.on, input: (event) => (model[mold[this.fetchKey]] = event) }
-          }),
-
-        select: (h, mold) => {
-          const childs = []
-          if (mold.options) {
-            for (const k in mold.options) {
-              childs.push(
-                h('el-option', {
-                  props: {
-                    value: mold.options[k][mold.props?.value || 'value'] || k,
-                    label: mold.options[k][mold.props?.label || 'label'] || mold.options[k],
-                    disabled: mold.options[k].disabled
-                  }
-                })
-              )
-            }
-          }
-          return h(
-            'el-select',
-            {
-              attrs: { placeholder: '请选择...', ...mold, value: model[mold[this.fetchKey]] },
-              on: { ...mold.on, input: (event) => (model[mold[this.fetchKey]] = event) }
-            },
-            childs
-          )
-        },
-
-        cascader: (h, mold) =>
-          h('el-cascader', {
-            props: { placeholder: '请选择...', ...mold, value: model[mold[this.fetchKey]] },
-            on: { ...mold.on, input: (event) => (model[mold[this.fetchKey]] = event) }
-          }),
-
-        date: (h, mold) =>
-          h('el-date-picker', {
-            style: mold.style,
-            attrs: {
-              type: 'date',
-              placeholder: '选择日期',
-              'range-separator': '',
-              'start-placeholder': '开始日期',
-              'end-placeholder': '结束日期',
-              valueFormat: this.dateValueFormat(mold.type),
-              ...mold,
-              value: model[mold[this.fetchKey]]
-            },
-            on: {
-              ...mold.on,
-              input: (event) => (model[mold[this.fetchKey]] = event)
-            }
-          })
-      })
-    }
+    return { form_list: this.molds, model: this.handleFormItem(this.molds) }
   },
 
   computed: {
     elFormRef() {
       return this.$refs.formRef
     }
+  },
+
+  created() {
+    this.comps = Object.freeze({
+      input: (h, mold) =>
+        h('el-input', {
+          attrs: { placeholder: '请输入...', ...mold, value: this.model[mold[this.fetchKey]] },
+          on: { ...mold.on, input: (event) => (this.model[mold[this.fetchKey]] = event) }
+        }),
+
+      select: (h, mold) => {
+        const childs = []
+        if (mold.options) {
+          for (const k in mold.options) {
+            childs.push(
+              h('el-option', {
+                props: {
+                  value: mold.options[k][mold.props?.value || 'value'] || k,
+                  label: mold.options[k][mold.props?.label || 'label'] || mold.options[k],
+                  disabled: mold.options[k].disabled
+                }
+              })
+            )
+          }
+        }
+        return h(
+          'el-select',
+          {
+            attrs: { placeholder: '请选择...', ...mold, value: this.model[mold[this.fetchKey]] },
+            on: { ...mold.on, input: (event) => (this.model[mold[this.fetchKey]] = event) }
+          },
+          childs
+        )
+      },
+
+      cascader: (h, mold) =>
+        h('el-cascader', {
+          props: { placeholder: '请选择...', ...mold, value: this.model[mold[this.fetchKey]] },
+          on: { ...mold.on, input: (event) => (this.model[mold[this.fetchKey]] = event) }
+        }),
+
+      date: (h, mold) =>
+        h('el-date-picker', {
+          style: mold.style,
+          attrs: {
+            type: 'date',
+            placeholder: '选择日期',
+            'range-separator': '',
+            'start-placeholder': '开始日期',
+            'end-placeholder': '结束日期',
+            valueFormat: this.dateValueFormat(mold.type),
+            ...mold,
+            value: this.model[mold[this.fetchKey]]
+          },
+          on: {
+            ...mold.on,
+            input: (event) => (this.model[mold[this.fetchKey]] = event)
+          }
+        })
+    })
   },
 
   methods: {
@@ -128,8 +126,8 @@ export default {
 
     validate(cb) {
       this.$refs.formRef.validate((valid) => {
-        if (valid) cb(fetchMoldValues(this.molds, { origin: this.model, key: '_prop' }))
-        else return false
+        if (valid) cb(fetchMoldValues(this.form_list, { origin: this.model, key: '_prop' }))
+        return valid
       })
     },
 
@@ -171,9 +169,9 @@ export default {
       {
         ref: 'formRef',
         class: ['qzui-form-layout', this.$attrs.class],
-        props: { ...this.$attrs, rules: this.custom ? undefined : this.rules, model: this.model }
+        props: { ...this.$attrs, rules: this.rules, model: this.model }
       },
-      this.molds.map((props) => this.fetchSlot(h, props))
+      this.form_list.map((props) => this.fetchSlot(h, props))
     )
   }
 }
