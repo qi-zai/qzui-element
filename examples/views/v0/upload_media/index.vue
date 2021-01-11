@@ -9,7 +9,7 @@
     </BoxCard>
 
     <BoxCard title="示例2 - 多选">
-      <div><UploadMedia multiple /></div>
+      <div><UploadMedia multiple download /></div>
       <div><UploadMedia type="image" accept="image/jpeg, image/gif, image/png" multiple /></div>
       <div><UploadMedia type="video" accept="video/mp4" multiple /></div>
 
@@ -58,16 +58,22 @@ export default {
       { parame: 'autoUpload', explain: '是否立即上传，必须与 on-upload 同时使用', type: 'boolean', default: 'false' },
       { parame: 'max', explain: '最多上传数量', type: 'number', default: 'Infinity' },
 
+      { parame: 'download', explain: '是否开启下载', type: 'boolean', default: 'false' },
       { parame: 'multiple', explain: '是否多选', type: 'boolean', default: 'false' },
       { parame: 'readonly', explain: '控件以只读模式显示', type: 'boolean', default: 'false' }
     ]
 
     this._Events = [
       {
+        method: 'on-download(file)',
+        explain: '只有当 download=true 时才会调用该方法',
+        parame: 'file：选择的文件<br>callback：成功后需要调用此函数'
+      },
+      {
         method: 'on-upload(file, callback)',
         explain: '只有当 autoUpload=true 时才会调用该方法<br>选取完文件后的回调，多用于异步上传文件',
         parame:
-          'file：选择的文件<br>callback：成功后需要调用此函数，<br> &nbsp;需要传入file对象<br> &nbsp;或者{ name:"文件名", link: "http://xxx.jpg", download: "下载地址" }'
+          'file：选择的文件<br>callback：成功后需要调用此函数，<br> &nbsp;需要传入file对象<br> &nbsp;或者{ name:"文件名", link: "http://xxx.jpg" }'
       }
     ]
   }

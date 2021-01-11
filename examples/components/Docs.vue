@@ -13,7 +13,9 @@
         </tr>
         <tr v-if="more" class="more">
           <td colspan="5">
-            <a :href="'https://element.eleme.cn/#/zh-CN/component/' + more" target="_blank">... 更多 ...</a>
+            <a :href="more.startsWith('http') ? more : 'https://element.eleme.cn/#/zh-CN/component/' + more" target="_blank">
+              ... 更多 ...
+            </a>
           </td>
         </tr>
       </tbody>

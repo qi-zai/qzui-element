@@ -24,5 +24,11 @@ export default [
     path: '/layout-form',
     meta: { title: 'Form 表单' },
     component: () => import(/* webpackChunkName: "v0/layout_form" */ '@/views/v0/layout_form')
+  },
+
+  {
+    path: '/tiny-editor',
+    meta: { title: '富文本' },
+    component: () => import(/* webpackChunkName: "v0/tiny_editor" */ '@/views/v0/tiny_editor')
   }
 ]

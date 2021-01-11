@@ -9,8 +9,9 @@ import DataTable from './components/data-table'
 import FilterLayout from './components/filter-layout'
 import FormLayout from './components/form-layout'
 import UploadMedia from './components/upload-media'
+import TinyEditor from './components/tiny-editor'
 
-const components = [DataTable, FilterLayout, UploadMedia, FormLayout]
+const components = [DataTable, FilterLayout, UploadMedia, FormLayout, TinyEditor]
 
 const install = function(Vue) {
   if (install.installed) return
@@ -30,7 +31,8 @@ export default {
   DataTable,
   FilterLayout,
   UploadMedia,
-  FormLayout
+  FormLayout,
+  TinyEditor
 }
 
-export { fetchMoldValues, DataTable, FilterLayout, FormLayout, UploadMedia }
+export { fetchMoldValues, DataTable, FilterLayout, FormLayout, UploadMedia, TinyEditor }

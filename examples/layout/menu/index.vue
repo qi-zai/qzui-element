@@ -41,7 +41,8 @@ export default {
       { label: '上传文件', icon: 'menu', link: '/upload-media' },
       { label: '数据筛选器', icon: 'menu', link: '/layout-filter' },
       { label: '数据表格', icon: 'menu', link: '/data-table' },
-      { label: 'FORM 表单', icon: 'menu', link: '/layout-form' }
+      { label: 'FORM 表单', icon: 'menu', link: '/layout-form' },
+      { label: '富文本', icon: 'menu', link: '/tiny-editor' }
     ])
   }),
 

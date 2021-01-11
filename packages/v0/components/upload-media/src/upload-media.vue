@@ -4,7 +4,7 @@
       <slot :item="v" :index="i">
         <img v-if="type === 'image'" :src="v.link" width="100%" height="100%" />
         <video v-else-if="type === 'video'" :src="v.link" controls mediatype="video" width="100%" height="100%" />
-        <a v-else class="media_text" :href="v.download || void 0" target="_blank">{{ v.name }}</a>
+        <span v-else class="media_text" :download="download" @click="download && $emit('on-download', v)">{{ v.name }}</span>
 
         <div v-if="!readonly" class="media_actions">
           <i class="icon el-icon-delete" title="删除" @click="deleteFile(i)" />
@@ -14,9 +14,9 @@
     </div>
 
     <template v-if="!readonly">
-      <button v-if="file_list.length < (multiple ? max : 1)" class="upload_media_item upload_media_action" @click="pushFile">
+      <div v-if="file_list.length < (multiple ? max : 1)" class="upload_media_item upload_media_action" @click="pushFile">
         <slot name="upload-label">{{ uploadLabel }}</slot>
-      </button>
+      </div>
     </template>
   </div>
 </template>
@@ -35,6 +35,7 @@ export default {
     max: { type: Number, default: Infinity },
     autoUpload: Boolean,
 
+    download: Boolean,
     readonly: Boolean,
     multiple: Boolean
   },
@@ -140,7 +141,9 @@ export default {
   }
 
   .upload_media_action {
-    outline: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     cursor: pointer;
     color: #a8a8a8;
     border: 1px dashed #e8e8e8;
@@ -193,7 +196,8 @@ export default {
         text-overflow: ellipsis;
         overflow: hidden;
 
-        &[href] {
+        &[download] {
+          cursor: pointer;
           color: #0096fa;
           text-decoration: underline;
         }
