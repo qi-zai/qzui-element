@@ -83,7 +83,7 @@ export default {
           '与 getValues() 搭配，效果更好<br>例1: "a.b" => { a: { b: "value" } }<br>例1: "c,d,..." => { c: value[0], d: value[1],... }，注意：此时value必须是Array<br>详情请看示例',
         type: 'String'
       },
-      { parame: 'display', explain: '控制控件显示或者隐藏', type: 'Boolean' },
+      { parame: 'display', explain: '用于控制列的显示隐藏', type: 'Boolean', default: 'true' },
       { parame: 'slot_key', explain: '自定义插槽key', type: 'String' },
       { parame: 'value', explain: '控件的初始默认值', type: 'any' },
       {

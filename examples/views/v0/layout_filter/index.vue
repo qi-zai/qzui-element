@@ -34,6 +34,7 @@ export default {
     ]
 
     this._Filters = [
+      { parame: 'display', explain: '用于控制列的显示隐藏', type: 'Boolean', default: 'true' },
       {
         parame: 'key',
         explain:

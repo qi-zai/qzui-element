@@ -10,7 +10,7 @@
 
     <BoxCard title="示例2 - 多选">
       <div><UploadMedia multiple download /></div>
-      <div><UploadMedia type="image" accept="image/jpeg, image/gif, image/png" multiple /></div>
+      <div><UploadMedia type="image" accept="image/jpeg, image/gif, image/png" multiple sort /></div>
       <div><UploadMedia type="video" accept="video/mp4" multiple /></div>
 
       <PreCode path="v0/upload_media/m_02/code" />
@@ -60,7 +60,8 @@ export default {
 
       { parame: 'download', explain: '是否开启下载', type: 'boolean', default: 'false' },
       { parame: 'multiple', explain: '是否多选', type: 'boolean', default: 'false' },
-      { parame: 'readonly', explain: '控件以只读模式显示', type: 'boolean', default: 'false' }
+      { parame: 'readonly', explain: '控件以只读模式显示', type: 'boolean', default: 'false' },
+      { parame: 'sort', explain: '是否开启拖拽排序', type: 'boolean', default: 'false' }
     ]
 
     this._Events = [

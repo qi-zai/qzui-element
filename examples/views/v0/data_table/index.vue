@@ -93,6 +93,7 @@ export default {
     ]
 
     this._Column = [
+      { parame: 'display', explain: '用于控制列的显示隐藏', type: 'Boolean', default: 'true' },
       {
         parame: 'type',
         explain: 'selection 多选框/index 行号索引/expand 可展开的按钮/custom 自定义插槽',
@@ -106,7 +107,11 @@ export default {
       { parame: 'width', explain: '每列的宽度', type: 'String' },
       { parame: 'headerAlign', explain: '表格头的对齐方式', type: 'String', options: 'left/center/right', default: 'center' },
       { parame: 'tag', explain: '同element-ui官网的el-tag', type: 'String/Function' },
-      { parame: 'actions', explain: '操作列，每一项是一个 el-button', type: 'Function/Array' },
+      {
+        parame: 'actions',
+        explain: '操作列，每一项是一个 el-button，每一项可以通过display来控制显示和隐藏',
+        type: 'Function/Array'
+      },
       { parame: '***', explain: '更多配置项，请参考element-ui官网' }
     ]
 

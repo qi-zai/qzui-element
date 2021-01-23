@@ -24,12 +24,17 @@ export default {
     }
   },
 
+  destroyed() {
+    this.$editor._destroyed = true
+  },
+
   mounted() {
     if (tinymce) this.init(tinymce)
   },
 
   methods: {
     init(editor) {
+      this.destroy()
       editor
         .init({
           selector: '#' + this.selector,
@@ -50,7 +55,8 @@ export default {
     },
 
     destroy() {
-      tinymce.remove(this.$editor)
+      let i = tinymce.editors.length
+      while (i--) if (tinymce.editors[i]._destroyed) tinymce.remove(tinymce.editors[i])
     }
   }
 }

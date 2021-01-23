@@ -1,10 +1,20 @@
 <template>
   <div v-loading="loading" :class="['upload_media', 'upload_media_type__' + type]">
-    <div v-for="(v, i) in file_list" :key="i" class="upload_media_item" :title="v.name">
+    <div v-for="(v, i) in file_list" :key="i" class="upload_media_item" :title="v.name" :media-index="i">
       <slot :item="v" :index="i">
-        <img v-if="type === 'image'" :src="v.link" width="100%" height="100%" />
-        <video v-else-if="type === 'video'" :src="v.link" controls mediatype="video" width="100%" height="100%" />
-        <span v-else class="media_text" :download="download" @click="download && $emit('on-download', v)">{{ v.name }}</span>
+        <img v-if="type === 'image'" :src="v.link" :draggable="sort" width="100%" height="100%" />
+        <video
+          v-else-if="type === 'video'"
+          :src="v.link"
+          :draggable="sort"
+          controls
+          mediatype="video"
+          width="100%"
+          height="100%"
+        />
+        <span v-else class="media_text" :download="download" :draggable="sort" @click="download && $emit('on-download', v)">
+          {{ v.name }}
+        </span>
 
         <div v-if="!readonly" class="media_actions">
           <i class="icon el-icon-delete" title="删除" @click="deleteFile(i)" />
@@ -37,7 +47,8 @@ export default {
 
     download: Boolean,
     readonly: Boolean,
-    multiple: Boolean
+    multiple: Boolean,
+    sort: Boolean
   },
 
   data() {
@@ -54,6 +65,13 @@ export default {
 
     file_list(v) {
       this.$emit('input', v)
+    },
+
+    sort: {
+      immediate: true,
+      handler(v) {
+        this.$nextTick(() => this[v ? 'addDragEvent' : 'removeDragEvent']())
+      }
     }
   },
 
@@ -91,6 +109,42 @@ export default {
 
     deleteFile(index) {
       this.$emit('on-change', this.file_list.splice(index, 1))
+    },
+
+    addDragEvent() {
+      let origin = null
+      this.events = {
+        dragstart: (e) => {
+          origin = e.target
+          origin.style.opacity = 0.5
+        },
+        dragend: (e) => (e.target.style.opacity = ''),
+        dragover: (e) => e.preventDefault(),
+        dragenter: (e) => e.target.draggable && (e.target.parentNode.style.border = '1px dashed red'),
+        dragleave: (e) => e.target.draggable && (e.target.parentNode.style.border = ''),
+        drop: (e) => {
+          e.preventDefault()
+          if (e.target.draggable) {
+            e.target.parentNode.style.borderColor = ''
+            this.insertMediaPosi(e.target.parentNode.getAttribute('media-index'), origin.parentNode.getAttribute('media-index'))
+          }
+        }
+      }
+
+      for (const name in this.events) {
+        this.$el.addEventListener(name, this.events[name], false)
+      }
+    },
+
+    insertMediaPosi(targetIndex, originIndex) {
+      if (targetIndex === originIndex) return
+      this.file_list.splice(targetIndex, 0, ...this.file_list.splice(originIndex, 1))
+    },
+
+    removeDragEvent() {
+      if (!this.events) return
+      for (const name in this.events) this.$el.removeEventListener(name, this.events[name])
+      this.events = null
     }
   }
 }

@@ -15,10 +15,6 @@ export const js = `export default {
         'undo redo | outdent indent | bold italic underline strikethrough | alignleft aligncenter alignright | forecolor backcolor | blockquote removeformat subscript superscript | searchreplace code media',
       plugins: 'code searchreplace media'
     }
-  },
-
-  beforeDestroy() {
-    this.$refs.editor_01.destroy()
   }
 }
 
