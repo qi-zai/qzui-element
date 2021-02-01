@@ -2,7 +2,7 @@ import './styles/index.scss'
 
 // ***************** script *****************
 import prototypeFn from './utils/prototype'
-import { fetchMoldValues } from './utils/tools'
+import { fillArray, uuid, fetchMoldValues } from './utils/tools'
 
 // ***************** 组件 *****************
 import DataTable from './components/data-table'
@@ -35,4 +35,4 @@ export default {
   TinyEditor
 }
 
-export { fetchMoldValues, DataTable, FilterLayout, FormLayout, UploadMedia, TinyEditor }
+export { fillArray, uuid, fetchMoldValues, DataTable, FilterLayout, FormLayout, UploadMedia, TinyEditor }
