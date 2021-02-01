@@ -1,11 +1,11 @@
 let inputEl = null
 
-if (!inputEl) {
-  inputEl = document.createElement('input')
-  inputEl.setAttribute('type', 'file')
-}
-
 export default function(callback, accept) {
+  if (!inputEl) {
+    inputEl = document.createElement('input')
+    inputEl.setAttribute('type', 'file')
+  }
+
   inputEl.setAttribute('accept', accept)
   if (callback)
     inputEl.onchange = () => {
