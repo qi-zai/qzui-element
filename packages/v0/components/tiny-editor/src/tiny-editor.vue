@@ -24,6 +24,12 @@ export default {
     }
   },
 
+  watch: {
+    value(v) {
+      this.$editor && this.$editor.setContent(v)
+    }
+  },
+
   destroyed() {
     this.$editor._destroyed = true
   },
@@ -48,7 +54,7 @@ export default {
           init_instance_callback: (editor) => {
             editor.setContent(this.value)
             this.$emit('initCallback', editor)
-            editor.on('nodechange input change', () => this.$emit('input', editor.getContent()))
+            editor.on('blur', () => this.$emit('input', editor.getContent()))
           }
         })
         .then(([editor]) => (this.$editor = editor))
