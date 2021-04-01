@@ -61,6 +61,7 @@ export default {
               width: this.columnWidth,
               headerAlign: this.headerAlign,
               align: ['selection', 'index'].includes(col.type) ? 'center' : this.align,
+              showOverflowTooltip: this.showOverflowTooltip,
               ...col
             },
             scopedSlots
@@ -106,7 +107,13 @@ export default {
       }
 
       return {
-        default: (attrs) => [h('div', (col.labelCallback && col.labelCallback(attrs)) || attrs.row[attrs.column.property])]
+        default: (attrs) => [
+          h(
+            'div',
+            { class: 'cell' + (attrs.column.showOverflowTooltip ? ' el-tooltip' : '') },
+            (col.labelCallback && col.labelCallback(attrs)) || attrs.row[attrs.column.property]
+          )
+        ]
       }
     },
 
