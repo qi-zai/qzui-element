@@ -84,7 +84,7 @@ export default {
         type: 'String'
       },
       { parame: 'display', explain: '用于控制列的显示隐藏', type: 'Boolean', default: 'true' },
-      { parame: 'style', explain: 'style 样式', type: 'String/Object/Function', default: 'false' },
+      { parame: 'style', explain: 'style 样式', type: 'String/Object/Function' },
       { parame: 'slot_key', explain: '自定义插槽key', type: 'String' },
       { parame: 'value', explain: '控件的初始默认值', type: 'any' },
       {
