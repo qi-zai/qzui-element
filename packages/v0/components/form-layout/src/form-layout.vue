@@ -159,7 +159,15 @@ export default {
           childs = [this.comps[props.mold](h, props)]
         }
       }
-      return h('el-form-item', { props, class: props.class }, childs)
+      return h(
+        'el-form-item',
+        {
+          props,
+          class: props.class,
+          style: (typeof props.style === 'function' && props.style({ cell: props, model: this.model })) || props.style
+        },
+        childs
+      )
     }
   },
 

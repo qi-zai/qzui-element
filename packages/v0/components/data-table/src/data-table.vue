@@ -13,6 +13,8 @@ export default {
     columnWidth: { type: String, default: null },
     align: { type: String, default: 'center' },
     headerAlign: { type: String, default: 'center' },
+    stripe: { type: Boolean, default: true },
+    showOverflowTooltip: { type: Boolean, default: true },
 
     on: { type: Object, default: () => ({}) },
 
