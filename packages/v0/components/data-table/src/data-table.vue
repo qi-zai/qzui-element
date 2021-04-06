@@ -158,6 +158,14 @@ export default {
 </script>
 
 <style lang="scss">
+.el-table .cell {
+  text-align: inherit;
+
+  &.el-tooltip .cell.el-tooltip {
+    padding: 0;
+  }
+}
+
 .qzui-data-table {
   .el-pagination {
     margin: 15px 0;
