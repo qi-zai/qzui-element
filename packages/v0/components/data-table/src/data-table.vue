@@ -31,6 +31,10 @@ export default {
     }
   },
 
+  mounted() {
+    this.elTableRef.doLayout()
+  },
+
   destroyed() {
     this.destroyedTimer()
   },
@@ -110,7 +114,7 @@ export default {
         default: (attrs) => [
           h(
             'div',
-            { class: 'cell' + (attrs.column.showOverflowTooltip ? ' el-tooltip' : '') },
+            { class: 'cell qz_cell' + (attrs.column.showOverflowTooltip ? ' el-tooltip' : '') },
             (col.labelCallback && col.labelCallback(attrs)) || attrs.row[attrs.column.property]
           )
         ]
@@ -161,7 +165,7 @@ export default {
 .el-table .cell {
   text-align: inherit;
 
-  &.el-tooltip .cell.el-tooltip {
+  &.cell.qz_cell {
     padding: 0;
   }
 }
