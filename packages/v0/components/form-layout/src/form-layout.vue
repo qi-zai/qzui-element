@@ -97,12 +97,12 @@ export default {
     },
 
     setValue(key, value) {
-      if (value) {
-        const item = this.form_list.find((v) => key === v.key)
-        if (item) this.model[item[this.fetchKey]] = value
-
+      const item = this.form_list.find((v) => key === v.key)
+      if (item) {
+        this.model[item[this.fetchKey]] = value
         this.clearValidate()
       }
+
       return this
     },
 
